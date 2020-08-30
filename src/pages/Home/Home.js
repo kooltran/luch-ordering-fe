@@ -6,7 +6,6 @@ import TimerCountDown from "../../components/TimerCountDown/TimerCountDown";
 import { useAppContext } from "../../AppContext";
 
 import { ToastContainer, toast } from "react-toastify";
-import axios from "axios";
 
 import "react-toastify/dist/ReactToastify.css";
 
@@ -26,19 +25,6 @@ const Home = () => {
         progress: undefined
       });
     }
-
-    const formData = new FormData();
-
-    formData.append("string", "Thứ Sáu");
-    formData.append("date", "2020-08-28");
-    console.log(formData, "formData");
-    axios
-      .post("https://www.anzi.com.vn/home/getListMenu", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data"
-        }
-      })
-      .then(res => console.log(res, "lala"));
   }, [createOrderSuccess]);
 
   return (

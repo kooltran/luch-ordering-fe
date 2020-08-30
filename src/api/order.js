@@ -7,9 +7,9 @@ export const createOrder = orders => {
 };
 
 export const getOrders = () => {
-  return axios.get(`/${DOMAIN}orders/list`).then(res => res.data);
+  return axios.get(`${DOMAIN}/orders/list`).then(res => res.data);
 };
 
 export const getAllOrders = () => {
-  return axios.get(`/${DOMAIN}orders/all`).then(res => res.data);
+  return axios.get(`${DOMAIN}/orders/all`).then(res => res.data);
 };
