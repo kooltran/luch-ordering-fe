@@ -23,7 +23,7 @@ const MenuItem = ({ item }) => {
         setTimeout(() => dispatch(removeCartAddedFlag()), 500);
       }
     } else {
-      window.open("http://localhost:3000/google", "_self");
+      window.open("https://luch-ordering.herokuapp.com/google", "_self");
     }
   };
 

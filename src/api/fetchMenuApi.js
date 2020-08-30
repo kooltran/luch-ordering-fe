@@ -1,5 +1,7 @@
 import axios from "axios";
 
+const DOMAIN = "https://luch-ordering.herokuapp.com";
+
 export const fetchMenuApi = () => {
-  return axios.get(`http://localhost:3000/menuList`).then(res => res.data);
+  return axios.get(`${DOMAIN}/menuList`).then(res => res.data);
 };

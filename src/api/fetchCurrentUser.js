@@ -1,5 +1,7 @@
 import axios from "axios";
 
+const DOMAIN = "https://luch-ordering.herokuapp.com";
+
 export const fetchCurrentUser = () => {
-  return axios.get(`http://localhost:3000/user`).then(res => res.data);
+  return axios.get(`${DOMAIN}/user`).then(res => res.data);
 };
