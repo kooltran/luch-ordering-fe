@@ -11,7 +11,7 @@ const TimerCountDown = () => {
   const year = curDate.getFullYear();
   const month = curDate.getMonth();
   const day = curDate.getDate();
-  const endTime = new Date(year, month, day, 10, 50, 0, 0).getTime();
+  const endTime = new Date(year, month, day, 23, 59, 0, 0).getTime();
 
   const startTime = new Date(year, month, day, 8, 0, 0, 0).getTime();
   const currentTime = new Date().getTime();
