@@ -13,6 +13,9 @@ const Home = () => {
   const [{ submitOrder }] = useAppContext();
   const { createOrderSuccess } = submitOrder;
 
+  const roles = localStorage.getItem("roles");
+  const isAdmin = roles === "admin";
+
   useEffect(() => {
     if (createOrderSuccess) {
       toast.success("Bạn đã đặt món thành công, chúc ngon bạn miệng!!!", {
@@ -30,7 +33,7 @@ const Home = () => {
   return (
     <div className="page">
       <h1 className="text-uppercase text-center">SP Team Luch Ordering</h1>
-      <TimerCountDown />
+      {!isAdmin && <TimerCountDown />}
       <OrderCart />
       <MenuList />
       <ToastContainer

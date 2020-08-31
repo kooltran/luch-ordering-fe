@@ -12,6 +12,7 @@ const MenuList = () => {
   const [{ menu }, dispatch] = useAppContext();
   const fetchMenuList = useFetchMenu();
   const { isLoading, menuList } = menu;
+
   useEffect(() => {
     const getCurrentUser = async () => {
       const curUser = await fetchCurrentUser();
