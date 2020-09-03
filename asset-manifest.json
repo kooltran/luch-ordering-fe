@@ -1,0 +1,35 @@
+{
+  "files": {
+    "main.css": "/luch-ordering-fe/static/css/main.7e556900.chunk.css",
+    "main.js": "/luch-ordering-fe/static/js/main.a629d664.chunk.js",
+    "main.js.map": "/luch-ordering-fe/static/js/main.a629d664.chunk.js.map",
+    "runtime-main.js": "/luch-ordering-fe/static/js/runtime-main.b7400314.js",
+    "runtime-main.js.map": "/luch-ordering-fe/static/js/runtime-main.b7400314.js.map",
+    "static/css/2.611f078b.chunk.css": "/luch-ordering-fe/static/css/2.611f078b.chunk.css",
+    "static/js/2.310a1e1a.chunk.js": "/luch-ordering-fe/static/js/2.310a1e1a.chunk.js",
+    "static/js/2.310a1e1a.chunk.js.map": "/luch-ordering-fe/static/js/2.310a1e1a.chunk.js.map",
+    "index.html": "/luch-ordering-fe/index.html",
+    "precache-manifest.d49a4cba3e30032e94e375be3f5852de.js": "/luch-ordering-fe/precache-manifest.d49a4cba3e30032e94e375be3f5852de.js",
+    "service-worker.js": "/luch-ordering-fe/service-worker.js",
+    "static/css/2.611f078b.chunk.css.map": "/luch-ordering-fe/static/css/2.611f078b.chunk.css.map",
+    "static/css/main.7e556900.chunk.css.map": "/luch-ordering-fe/static/css/main.7e556900.chunk.css.map",
+    "static/js/2.310a1e1a.chunk.js.LICENSE.txt": "/luch-ordering-fe/static/js/2.310a1e1a.chunk.js.LICENSE.txt",
+    "static/media/cart.svg": "/luch-ordering-fe/static/media/cart.890dce60.svg",
+    "static/media/checklist.svg": "/luch-ordering-fe/static/media/checklist.80d775c4.svg",
+    "static/media/congrats.svg": "/luch-ordering-fe/static/media/congrats.211b8e65.svg",
+    "static/media/cross.svg": "/luch-ordering-fe/static/media/cross.441d8611.svg",
+    "static/media/fobiden-order.svg": "/luch-ordering-fe/static/media/fobiden-order.6b4b70dc.svg",
+    "static/media/loading.svg": "/luch-ordering-fe/static/media/loading.546dec86.svg",
+    "static/media/logo.svg": "/luch-ordering-fe/static/media/logo.913ae04a.svg",
+    "static/media/App.scss": "/luch-ordering-fe/static/media/old_paper_bg.566800df.jpg",
+    "static/media/plus.svg": "/luch-ordering-fe/static/media/plus.311313cd.svg",
+    "static/media/Orders.scss": "/luch-ordering-fe/static/media/tick.db93b3b8.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.b7400314.js",
+    "static/css/2.611f078b.chunk.css",
+    "static/js/2.310a1e1a.chunk.js",
+    "static/css/main.7e556900.chunk.css",
+    "static/js/main.a629d664.chunk.js"
+  ]
+}
