@@ -1,54 +1,79 @@
-import React, { useEffect } from "react";
-import MenuList from "../../components/Menu/Menu";
-import OrderCart from "../../components/Order/OrderCart";
+import React, { useEffect, useState } from 'react'
+import MenuList from '../../components/Menu/Menu'
+import OrderCart from '../../components/Order/OrderCart'
 
-import TimerCountDown from "../../components/TimerCountDown/TimerCountDown";
-import { useAppContext } from "../../AppContext";
+import TimerCountDown from '../../components/TimerCountDown/TimerCountDown'
+import { useAppContext } from '../../AppContext'
 
-import { ToastContainer, toast } from "react-toastify";
+import Congrats from '../../assets/congrats.svg'
+import OrderList from '../../assets/checklist.svg'
+import { useHistory } from 'react-router-dom'
 
-import "react-toastify/dist/ReactToastify.css";
+import 'react-toastify/dist/ReactToastify.css'
+import Modal from 'react-bootstrap/Modal'
+
+import './Home.scss'
 
 const Home = () => {
-  const [{ submitOrder }] = useAppContext();
-  const { createOrderSuccess } = submitOrder;
+  const [{ submitOrder }] = useAppContext()
+  const { createOrderSuccess } = submitOrder
+  const [show, setOpen] = useState(createOrderSuccess)
+  let history = useHistory()
 
-  const roles = localStorage.getItem("roles");
-  const isAdmin = roles === "admin";
+  const roles = localStorage.getItem('roles')
+  const isAdmin = roles === 'admin'
 
   useEffect(() => {
     if (createOrderSuccess) {
-      toast.success("Bạn đã đặt món thành công, chúc ngon bạn miệng!!!", {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined
-      });
+      setOpen(createOrderSuccess)
     }
-  }, [createOrderSuccess]);
+  }, [createOrderSuccess])
+
+  const handleCloseModal = () => {
+    setOpen(false)
+  }
+
+  const handleGotoOrder = () => {
+    history.push('/orders')
+  }
 
   return (
     <div className="page">
       <h1 className="text-uppercase text-center">SP Team Luch Ordering</h1>
       {!isAdmin && <TimerCountDown />}
+      <a href="/orders" className="icon-orders">
+        <img src={OrderList} alt="checklist" />
+      </a>
       <OrderCart />
       <MenuList />
-      <ToastContainer
-        position="top-right"
-        autoClose={2000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
+      <Modal
+        className="congrats-modal food-modal"
+        show={show}
+        onHide={handleCloseModal}
+        backdrop="static"
+        keyboard={true}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Body className="food-modal__body">
+          <img className="modal-icon" src={Congrats} alt="forbiden-order" />
+          <div className="congrats-message">
+            Thank you! Bạn đã order thành công!!
+            <p>Chúc Ngon miệng</p>
+          </div>
+          <div className="congrats-button">
+            <button className="btn-close" onClick={handleCloseModal}>
+              Đóng
+            </button>
+            <button className="go-order" onClick={handleGotoOrder}>
+              Xem order
+            </button>
+          </div>
+        </Modal.Body>
+      </Modal>
     </div>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home

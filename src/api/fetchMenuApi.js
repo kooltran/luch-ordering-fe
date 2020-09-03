@@ -1,7 +1,6 @@
-import axios from "axios";
-
-const DOMAIN = "https://luch-ordering.herokuapp.com";
+import axios from 'axios'
+import { DOMAIN } from '../constants'
 
 export const fetchMenuApi = () => {
-  return axios.get(`${DOMAIN}/menuList`).then(res => res.data);
-};
+  return axios.get(`${DOMAIN}/menuList`).then(res => res.data)
+}

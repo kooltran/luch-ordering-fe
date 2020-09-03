@@ -1,42 +1,51 @@
-import React, { useState } from "react";
-import { useAppContext } from "../../AppContext";
-import IconPlus from "../../assets/plus.svg";
-import { addCartItem, removeCartAddedFlag } from "../../actions/cartAction";
-import classnames from "classnames";
+import React, { useState } from 'react'
+import classnames from 'classnames'
+
+import { useAppContext } from '../../AppContext'
+import IconPlus from '../../assets/plus.svg'
+import { addCartItem, removeCartAddedFlag } from '../../actions/cartAction'
+import { REDIRECT_URL } from '../../constants'
 
 const MenuItem = ({ item }) => {
-  const [quantity, setQty] = useState(1);
-  const [{ currentUser, cart, orderTimeout }, dispatch] = useAppContext();
-  const { user } = currentUser;
-  const { cartList } = cart;
+  const [quantity, setQty] = useState(1)
+  const [{ currentUser, cart, orderTimeout }, dispatch] = useAppContext()
+  const { user } = currentUser
+  const { cartList } = cart
 
   const handleAddTocart = () => {
-    const formattedCartItem = { id: item._id, dish_name: item.name, quantity };
+    const formattedCartItem = { id: item._id, dish_name: item.name, quantity }
     if (user.username) {
       if (cartList.length === 0) {
-        dispatch(addCartItem(cartList));
-        setTimeout(() => dispatch(removeCartAddedFlag()), 500);
-        cartList.push(formattedCartItem);
+        dispatch(addCartItem(cartList))
+        setTimeout(() => dispatch(removeCartAddedFlag()), 500)
+        cartList.push(formattedCartItem)
       } else {
-        const cartAdded = [...cartList, formattedCartItem];
-        dispatch(addCartItem(cartAdded));
-        setTimeout(() => dispatch(removeCartAddedFlag()), 500);
+        const cartAdded = [...cartList, formattedCartItem]
+        dispatch(addCartItem(cartAdded))
+        setTimeout(() => dispatch(removeCartAddedFlag()), 500)
       }
     } else {
-      window.open("https://luch-ordering.herokuapp.com/google", "_self");
+      window.open(REDIRECT_URL, '_self')
     }
-  };
+  }
 
   const handleChangeQuantity = ({ target: { value } }) => {
-    setQty(value);
-  };
+    const quantity = parseInt(value)
+    if (quantity <= 0) {
+      setQty(1)
+    } else if (quantity > 5) {
+      setQty(5)
+    } else {
+      setQty(quantity)
+    }
+  }
 
   return (
     <div
-      className={classnames("menu-item", {
-        "is-disabled":
+      className={classnames('menu-item', {
+        'is-disabled':
           cartList.some(cart => cart.id === item._id) ||
-          orderTimeout.isOrderTimeout
+          orderTimeout.isOrderTimeout,
       })}
     >
       <div className="image">
@@ -60,7 +69,7 @@ const MenuItem = ({ item }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default MenuItem;
+export default MenuItem
