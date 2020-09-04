@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/lunch-ordering-fe/static/css/main.6c6b7b60.chunk.css",
-    "main.js": "/lunch-ordering-fe/static/js/main.5806caf4.chunk.js",
-    "main.js.map": "/lunch-ordering-fe/static/js/main.5806caf4.chunk.js.map",
+    "main.js": "/lunch-ordering-fe/static/js/main.4ab2e395.chunk.js",
+    "main.js.map": "/lunch-ordering-fe/static/js/main.4ab2e395.chunk.js.map",
     "runtime-main.js": "/lunch-ordering-fe/static/js/runtime-main.7725a23b.js",
     "runtime-main.js.map": "/lunch-ordering-fe/static/js/runtime-main.7725a23b.js.map",
     "static/css/2.611f078b.chunk.css": "/lunch-ordering-fe/static/css/2.611f078b.chunk.css",
     "static/js/2.310a1e1a.chunk.js": "/lunch-ordering-fe/static/js/2.310a1e1a.chunk.js",
     "static/js/2.310a1e1a.chunk.js.map": "/lunch-ordering-fe/static/js/2.310a1e1a.chunk.js.map",
     "index.html": "/lunch-ordering-fe/index.html",
-    "precache-manifest.3280e8b8074c4446915a01819ff6e281.js": "/lunch-ordering-fe/precache-manifest.3280e8b8074c4446915a01819ff6e281.js",
+    "precache-manifest.e8a33a311b69d2910ed2e3259390d288.js": "/lunch-ordering-fe/precache-manifest.e8a33a311b69d2910ed2e3259390d288.js",
     "service-worker.js": "/lunch-ordering-fe/service-worker.js",
     "static/css/2.611f078b.chunk.css.map": "/lunch-ordering-fe/static/css/2.611f078b.chunk.css.map",
     "static/css/main.6c6b7b60.chunk.css.map": "/lunch-ordering-fe/static/css/main.6c6b7b60.chunk.css.map",
@@ -30,6 +30,6 @@
     "static/css/2.611f078b.chunk.css",
     "static/js/2.310a1e1a.chunk.js",
     "static/css/main.6c6b7b60.chunk.css",
-    "static/js/main.5806caf4.chunk.js"
+    "static/js/main.4ab2e395.chunk.js"
   ]
 }
