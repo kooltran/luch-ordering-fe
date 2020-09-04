@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/luch-ordering-fe/precache-manifest.d49a4cba3e30032e94e375be3f5852de.js"
+  "/luch-ordering-fe/precache-manifest.05819327fc5660cb90576316273e929f.js"
 );
 
 self.addEventListener('message', (event) => {

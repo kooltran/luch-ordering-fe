@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "9781dcfd4a908e28b66398fb79602dd4",
+    "revision": "f042f2e356f01378f5161ec933c000fb",
     "url": "/luch-ordering-fe/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/luch-ordering-fe/static/css/2.611f078b.chunk.css"
   },
   {
-    "revision": "c9ddce3b06f070818d6a",
+    "revision": "0f3aee704126437806cf",
     "url": "/luch-ordering-fe/static/css/main.7e556900.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/luch-ordering-fe/static/js/2.310a1e1a.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "c9ddce3b06f070818d6a",
-    "url": "/luch-ordering-fe/static/js/main.a629d664.chunk.js"
+    "revision": "0f3aee704126437806cf",
+    "url": "/luch-ordering-fe/static/js/main.eb591ae3.chunk.js"
   },
   {
     "revision": "a88ffaf7ac03d71b433a",
