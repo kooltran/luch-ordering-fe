@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/lunch-ordering-fe/precache-manifest.39f77c45f17a6c029b18abe821f276a0.js"
+  "/lunch-ordering-fe/precache-manifest.9c2e60e1c1555ea8eb2e15686a04825b.js"
 );
 
 self.addEventListener('message', (event) => {
