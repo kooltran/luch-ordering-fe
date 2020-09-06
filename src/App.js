@@ -14,7 +14,7 @@ const App = () => {
   return (
     <div className="main-wrapper">
       <div className="container">
-        <a href="/" className="main-logo">
+        <a href="/lunch_ordering-fe" className="main-logo">
           <img src={Logo} alt="logo" />
         </a>
         <Router>

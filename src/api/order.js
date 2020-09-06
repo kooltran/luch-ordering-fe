@@ -1,14 +1,39 @@
-import axios from 'axios'
-import { DOMAIN } from '../constants'
+import axios from "axios";
+import { DOMAIN } from "../constants";
 
 export const createOrder = orders => {
-  return axios.post(`${DOMAIN}/orders/create`, orders).then(res => res.data)
-}
+  const token = localStorage.getItem("token");
+
+  return axios
+    .post(`${DOMAIN}/orders/create`, orders, {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+    .then(res => res.data);
+};
 
 export const getOrders = () => {
-  return axios.get(`${DOMAIN}/orders/list`).then(res => res.data)
-}
+  const token = localStorage.getItem("token");
+  return axios
+    .get(`${DOMAIN}/orders/list`, {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+    .then(res => res.data);
+};
 
 export const getAllOrders = () => {
-  return axios.get(`${DOMAIN}/orders/all`).then(res => res.data)
-}
+  const token = localStorage.getItem("token");
+  return axios
+    .get(`${DOMAIN}/orders/all`, {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+    .then(res => res.data);
+};
+
+export const checkPaid = params => {
+  const token = localStorage.getItem("token");
+  return axios
+    .post(`${DOMAIN}/orders/check-paid`, params, {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+    .then(res => res.data);
+};

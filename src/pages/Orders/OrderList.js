@@ -38,12 +38,10 @@ const Orders = () => {
   }, [dispatch]);
 
   const sortedList = orderList.sort((a, b) =>
-    a.dish_name.localeCompare(b.dish_name)
+    a.dish.name.localeCompare(b.dish_name)
   );
 
   const orderListGroupByDate = groupByNTotal(orderList, "date");
-
-  console.log(orderListGroupByDate);
 
   return (
     <div className="order-wrapper">
@@ -65,21 +63,21 @@ const Orders = () => {
       {sortedList.length !== 0 && (
         <div className="order-content">
           <div className="order-item__title">
-            <span>Tên Món</span>
+            <span>Người Order</span>
             <span>Số Lượng</span>
             <span>Ngày Order</span>
-            <span>Người Order</span>
+            <span>Tên Món</span>
+            <span>Giá</span>
             {isAdmin && <span className="paid">Paid</span>}
           </div>
           {Object.keys(orderListGroupByDate).map(item => {
-            console.log();
             return (
               <>
                 <div className="order-item__date-title" key={item}>
                   {item}
                 </div>
                 {orderListGroupByDate[item].map(order => (
-                  <OrderItem order={order} isAdmin />
+                  <OrderItem key={order._id} order={order} isAdmin />
                 ))}
               </>
             );

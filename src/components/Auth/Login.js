@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams, useLocation, useHistory } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 import { REDIRECT_URL } from "../../constants";
 import qs from "query-string";
 

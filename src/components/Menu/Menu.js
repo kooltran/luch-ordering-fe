@@ -21,7 +21,7 @@ const MenuList = () => {
     };
     getCurrentUser();
     fetchMenuList();
-  }, []);
+  }, [dispatch, fetchMenuList]);
 
   return (
     <div className="menu-wrapper">

@@ -1,46 +1,45 @@
-import React, { useState } from 'react'
-import classnames from 'classnames'
-import { useAppContext } from '../../AppContext'
-import OrderItem from './OrderItem'
-import { useSubmitOrder } from './useSubmitOrder'
+import React, { useState } from "react";
+import classnames from "classnames";
+import { useAppContext } from "../../AppContext";
+import OrderItem from "./OrderItem";
+import { useSubmitOrder } from "./useSubmitOrder";
 
-import CartIcon from '../../assets/cart.svg'
-import IconLoading from '../../assets/loading.svg'
+import CartIcon from "../../assets/cart.svg";
+import IconLoading from "../../assets/loading.svg";
 
-import './Order.scss'
+import "./Order.scss";
 
 const OrderCart = () => {
-  const [{ currentUser, cart, submitOrder }] = useAppContext()
-  const { cartList, cartAdded } = cart
-  const { isLoading } = submitOrder
-  const [openCart, setOpenCart] = useState(false)
-  const submitOrders = useSubmitOrder()
+  const [{ cart, submitOrder }] = useAppContext();
+  const { cartList, cartAdded } = cart;
+  const { isLoading } = submitOrder;
+  const [openCart, setOpenCart] = useState(false);
+  const submitOrders = useSubmitOrder();
 
-  const handleOpenCart = () => setOpenCart(!openCart)
+  const handleOpenCart = () => setOpenCart(!openCart);
 
   const handleSubmitOrder = () => {
     const orderListParams = cartList.map(order => ({
-      dish_name: order.dish_name,
+      dishId: order.id,
       quantity: order.quantity,
-      name: currentUser.user.username,
-      price: 35,
       date: new Date().toDateString(),
-    }))
-    submitOrders(orderListParams)
-  }
+      paid: false
+    }));
+    submitOrders(orderListParams);
+  };
 
   return (
     <div className="cart-wrapper">
       <div
-        className={classnames('cart-icon', { shake: cartAdded })}
+        className={classnames("cart-icon", { shake: cartAdded })}
         onClick={handleOpenCart}
       >
         <img src={CartIcon} alt="cart-icon" />
         <span className="cart-qty">{cartList.length}</span>
       </div>
       <div
-        className={classnames('cart-content', {
-          show: openCart && cartList.length,
+        className={classnames("cart-content", {
+          show: openCart && cartList.length
         })}
       >
         {isLoading && <img className="cart-loading" src={IconLoading} alt="" />}
@@ -52,7 +51,7 @@ const OrderCart = () => {
         </button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default OrderCart
+export default OrderCart;

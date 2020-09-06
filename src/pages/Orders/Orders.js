@@ -1,46 +1,57 @@
-import React, { useEffect } from 'react'
-import { useAppContext } from '../../AppContext'
+import React, { useEffect } from "react";
+import { useAppContext } from "../../AppContext";
 
 import {
   getOrdersRequest,
   getOrdersSuccess,
-  getOrdersFail,
-} from '../../actions/orderAction'
-import OrderItem from './OrderItem'
-import { getOrders } from '../../api/order'
+  getOrdersFail
+} from "../../actions/orderAction";
+import OrderItem from "./OrderItem";
+import { getOrders } from "../../api/order";
 
-import { groupByNTotal } from '../../helpers'
+import { groupByNTotal } from "../../helpers";
 
-import './Orders.scss'
-import IconLoading from '../../assets/loading.svg'
+import "./Orders.scss";
+import IconLoading from "../../assets/loading.svg";
 
 const Orders = () => {
   const [
     {
-      orders: { orderList, isLoading },
+      orders: { orderList, isLoading }
     },
-    dispatch,
-  ] = useAppContext()
+    dispatch
+  ] = useAppContext();
 
-  const roles = localStorage.getItem('roles')
-  const isAdmin = roles === 'admin'
+  const roles = localStorage.getItem("roles");
+  const isAdmin = roles === "admin";
 
   useEffect(() => {
     const getOrderList = async orders => {
-      dispatch(getOrdersRequest())
+      dispatch(getOrdersRequest());
       try {
-        const res = await getOrders()
-        dispatch(getOrdersSuccess(res))
-        // dispatch(deleteCart())
+        const res = await getOrders();
+        dispatch(getOrdersSuccess(res));
       } catch (error) {
-        dispatch(getOrdersFail(error))
+        dispatch(getOrdersFail(error));
       }
-    }
-    getOrderList()
-  }, [dispatch])
-  const sortedList = orderList.sort((a, b) => a.dish_name.localeCompare(b.name))
+    };
+    getOrderList();
+  }, [dispatch]);
 
-  const orderListGroupByDishname = groupByNTotal(orderList, 'dish_name')
+  const sortedList = orderList.sort((a, b) =>
+    a.dish.name.localeCompare(b.name)
+  );
+
+  const formattedOrderList = orderList.map(order => ({
+    quantity: order.quantity,
+    dishName: order.dish.name,
+    price: 35
+  }));
+
+  const orderListGroupByDishname = groupByNTotal(
+    formattedOrderList,
+    "dishName"
+  );
 
   const orderListTotalQty = Object.keys(orderListGroupByDishname).map(item => ({
     name: item,
@@ -51,17 +62,19 @@ const Orders = () => {
     price: orderListGroupByDishname[item].reduce(
       (acc, ele) => acc + ele.price * ele.quantity,
       0
-    ),
-  }))
+    )
+  }));
 
   const totalQtyDishes = orderListTotalQty.reduce(
     (acc, item) => acc + item.qty,
     0
-  )
+  );
+
   const totalPriceDishes = orderListTotalQty.reduce(
     (acc, item) => acc + item.price,
     0
-  )
+  );
+
   return (
     <div className="page">
       <div className="order-wrapper">
@@ -112,7 +125,7 @@ const Orders = () => {
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Orders
+export default Orders;
