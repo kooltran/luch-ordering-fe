@@ -1,11 +1,11 @@
-import axios from 'axios'
-import { DOMAIN } from '../constants'
+import axios from "axios";
+import { DOMAIN } from "../constants";
 
 export const fetchCurrentUser = () => {
+  const token = localStorage.getItem("token");
   return axios
     .get(`${DOMAIN}/user`, {
-      headers: { 'Access-Control-Allow-Origin': '*' },
-      withCredentials: true,
+      headers: { Authorization: `Bearer ${token}` }
     })
-    .then(res => res.data)
-}
+    .then(res => res.data);
+};

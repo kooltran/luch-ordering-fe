@@ -1,41 +1,41 @@
-import React, { useEffect, useState } from 'react'
-import MenuList from '../../components/Menu/Menu'
-import OrderCart from '../../components/Order/OrderCart'
+import React, { useEffect, useState } from "react";
+import MenuList from "../../components/Menu/Menu";
+import OrderCart from "../../components/Order/OrderCart";
 
-import TimerCountDown from '../../components/TimerCountDown/TimerCountDown'
-import { useAppContext } from '../../AppContext'
+import TimerCountDown from "../../components/TimerCountDown/TimerCountDown";
+import { useAppContext } from "../../AppContext";
 
-import Congrats from '../../assets/congrats.svg'
-import OrderList from '../../assets/checklist.svg'
-import { useHistory } from 'react-router-dom'
+import Congrats from "../../assets/congrats.svg";
+import OrderList from "../../assets/checklist.svg";
+import { useHistory } from "react-router-dom";
 
-import 'react-toastify/dist/ReactToastify.css'
-import Modal from 'react-bootstrap/Modal'
+import "react-toastify/dist/ReactToastify.css";
+import Modal from "react-bootstrap/Modal";
 
-import './Home.scss'
+import "./Home.scss";
 
 const Home = () => {
-  const [{ submitOrder }] = useAppContext()
-  const { createOrderSuccess } = submitOrder
-  const [show, setOpen] = useState(createOrderSuccess)
-  let history = useHistory()
+  const [{ submitOrder }] = useAppContext();
+  const { createOrderSuccess } = submitOrder;
+  const [show, setOpen] = useState(createOrderSuccess);
+  let history = useHistory();
 
-  const roles = localStorage.getItem('roles')
-  const isAdmin = roles === 'admin'
+  const roles = localStorage.getItem("roles");
+  const isAdmin = roles === "admin";
 
   useEffect(() => {
     if (createOrderSuccess) {
-      setOpen(createOrderSuccess)
+      setOpen(createOrderSuccess);
     }
-  }, [createOrderSuccess])
+  }, [createOrderSuccess]);
 
   const handleCloseModal = () => {
-    setOpen(false)
-  }
+    setOpen(false);
+  };
 
   const handleGotoOrder = () => {
-    history.push('/orders')
-  }
+    history.push("/orders");
+  };
 
   return (
     <div className="page">
@@ -73,7 +73,7 @@ const Home = () => {
         </Modal.Body>
       </Modal>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
