@@ -39,9 +39,9 @@ const Home = () => {
 
   return (
     <div className="page">
-      <h1 className="text-uppercase text-center">SP Team Luch Ordering</h1>
+      <h1 className="text-uppercase text-center">SP Team Lunch Ordering</h1>
       {!isAdmin && <TimerCountDown />}
-      <a href="/orders" className="icon-orders">
+      <a href="/lunch-ordering-fe/#/orders" className="icon-orders">
         <img src={OrderList} alt="checklist" />
       </a>
       <OrderCart />
