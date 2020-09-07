@@ -1,76 +1,75 @@
-import React, { useState } from "react";
-import classnames from "classnames";
+import React, { useState } from 'react'
+import classnames from 'classnames'
 
-import { useAppContext } from "../../AppContext";
-import IconPlus from "../../assets/plus.svg";
-import { addCartItem, removeCartAddedFlag } from "../../actions/cartAction";
-import { REDIRECT_URL } from "../../constants";
+import { useAppContext } from '../../AppContext'
+import IconPlus from '../../assets/plus.svg'
+import { addCartItem, removeCartAddedFlag } from '../../actions/cartAction'
+import { REDIRECT_URL } from '../../constants'
 
 const MenuItem = ({ item }) => {
-  const [quantity, setQty] = useState(1);
-  const [{ currentUser, cart, orderTimeout }, dispatch] = useAppContext();
-  const { user } = currentUser;
-  const { cartList } = cart;
+  const [quantity, setQty] = useState(1)
+  const [{ currentUser, cart, orderTimeout }, dispatch] = useAppContext()
+  const { user } = currentUser
+  const { cartList } = cart
 
   const handleAddTocart = () => {
-    const formattedCartItem = { id: item._id, dish_name: item.name, quantity };
+    const formattedCartItem = { id: item._id, dish_name: item.name, quantity }
     if (user.username) {
       if (cartList.length === 0) {
-        dispatch(addCartItem(cartList));
-        setTimeout(() => dispatch(removeCartAddedFlag()), 500);
-        cartList.push(formattedCartItem);
+        dispatch(addCartItem(cartList))
+        setTimeout(() => dispatch(removeCartAddedFlag()), 500)
+        cartList.push(formattedCartItem)
       } else {
-        const cartAdded = [...cartList, formattedCartItem];
-        dispatch(addCartItem(cartAdded));
-        setTimeout(() => dispatch(removeCartAddedFlag()), 500);
+        const cartAdded = [...cartList, formattedCartItem]
+        dispatch(addCartItem(cartAdded))
+        setTimeout(() => dispatch(removeCartAddedFlag()), 500)
       }
     } else {
-      dispatch(addCartItem(cartList));
-      window.open(REDIRECT_URL, "_self");
+      window.open(REDIRECT_URL, '_self')
     }
-  };
+  }
 
   const handleChangeQuantity = ({ target: { value } }) => {
-    const quantity = parseInt(value);
+    const quantity = parseInt(value)
     if (quantity <= 0) {
-      setQty(1);
+      setQty(1)
     } else if (quantity > 5) {
-      setQty(5);
+      setQty(5)
     } else {
-      setQty(quantity);
+      setQty(quantity)
     }
-  };
+  }
 
   return (
     <div
-      className={classnames("menu-item", {
-        "is-disabled":
+      className={classnames('menu-item', {
+        'is-disabled':
           cartList.some(cart => cart.id === item._id) ||
           orderTimeout.isOrderTimeout
       })}
     >
-      <div className="image">
-        <img className="img-dish" src={item.img} alt={item.name} />
+      <div className='image'>
+        <img className='img-dish' src={item.img} alt={item.name} />
         <div onClick={handleAddTocart}>
-          <img className="icon-add" src={IconPlus} alt="" />
+          <img className='icon-add' src={IconPlus} alt='' />
         </div>
       </div>
 
-      <div className="desc">
-        <div className="info">
-          <span className="name">{item.name}</span>
-          <span className="price">{item.price}</span>
+      <div className='desc'>
+        <div className='info'>
+          <span className='name'>{item.name}</span>
+          <span className='price'>{item.price}</span>
         </div>
-        <div className="quantity">
+        <div className='quantity'>
           <input
-            type="number"
+            type='number'
             value={quantity}
             onChange={handleChangeQuantity}
           />
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default MenuItem;
+export default MenuItem
