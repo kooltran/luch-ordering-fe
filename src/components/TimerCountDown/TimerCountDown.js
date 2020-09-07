@@ -1,85 +1,85 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from 'react'
 
-import Modal from "react-bootstrap/Modal";
+import Modal from 'react-bootstrap/Modal'
 
-import ForbidenOrder from "../../assets/fobiden-order.svg";
+import ForbidenOrder from '../../assets/fobiden-order.svg'
 
-import "./TimerCountDown.scss";
+import './TimerCountDown.scss'
 
 const TimerCountDown = () => {
-  const curDate = new Date();
-  const year = curDate.getFullYear();
-  const month = curDate.getMonth();
-  const day = curDate.getDate();
-  const endTime = new Date(year, month, day, 23, 59, 0, 0).getTime();
+  const curDate = new Date()
+  const year = curDate.getFullYear()
+  const month = curDate.getMonth()
+  const day = curDate.getDate()
+  const endTime = new Date(year, month, day, 10, 50, 0, 0).getTime()
 
-  const startTime = new Date(year, month, day, 0, 1, 0, 0).getTime();
-  const currentTime = new Date().getTime();
+  const startTime = new Date(year, month, day, 0, 1, 0, 0).getTime()
+  const currentTime = new Date().getTime()
 
-  const isOpenOrder = currentTime >= startTime;
+  const isOpenOrder = currentTime >= startTime
 
   const [state, setState] = useState({
     hours: 0,
     minutes: 0,
     seconds: 0
-  });
+  })
 
-  const [countDownTime] = useState(endTime);
+  const [countDownTime] = useState(endTime)
 
-  const [isOrderTimeout, setOrderTimeout] = useState(false);
+  const [isOrderTimeout, setOrderTimeout] = useState(false)
 
   const setNewTime = useCallback(() => {
     if (countDownTime) {
-      const currentTime = new Date().getTime();
+      const currentTime = new Date().getTime()
 
-      const distanceToDate = countDownTime - currentTime;
+      const distanceToDate = countDownTime - currentTime
 
       let minutes = Math.floor(
         (distanceToDate % (1000 * 60 * 60)) / (1000 * 60)
-      );
-      let seconds = Math.floor((distanceToDate % (1000 * 60)) / 1000);
+      )
+      let seconds = Math.floor((distanceToDate % (1000 * 60)) / 1000)
 
-      const numbersToAddZeroTo = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+      const numbersToAddZeroTo = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
       let hours = Math.floor(
         (distanceToDate % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-      );
+      )
 
       if (numbersToAddZeroTo.includes(hours)) {
-        hours = `0${hours}`;
+        hours = `0${hours}`
       }
 
       if (numbersToAddZeroTo.includes(minutes)) {
-        minutes = `0${minutes}`;
+        minutes = `0${minutes}`
       }
 
       if (numbersToAddZeroTo.includes(seconds)) {
-        seconds = `0${seconds}`;
+        seconds = `0${seconds}`
       }
-      setState({ hours: hours, minutes, seconds });
+      setState({ hours: hours, minutes, seconds })
 
       if (hours <= 0 && minutes <= 0 && seconds <= 0) {
-        setOrderTimeout(true);
+        setOrderTimeout(true)
       } else {
-        setOrderTimeout(false);
+        setOrderTimeout(false)
       }
     }
-  }, [countDownTime]);
+  }, [countDownTime])
 
   useEffect(() => {
-    setInterval(() => setNewTime(), 1000);
+    setInterval(() => setNewTime(), 1000)
     if (isOrderTimeout) {
-      return () => clearInterval(setNewTime);
+      return () => clearInterval(setNewTime)
     }
-  }, [isOrderTimeout, setNewTime]);
+  }, [isOrderTimeout, setNewTime])
 
-  const { hours, minutes, seconds } = state;
+  const { hours, minutes, seconds } = state
 
   return (
-    <div className="countdown">
+    <div className='countdown'>
       {hours >= 0 && minutes >= 0 && seconds > 0 && (
         <div>
-          <p className="countdown-message">Thời gian order của bạn còn lại</p>
+          <p className='countdown-message'>Thời gian order của bạn còn lại</p>
           <span>{hours}</span>
           <span>{minutes}</span>
           <span>{seconds}</span>
@@ -87,37 +87,37 @@ const TimerCountDown = () => {
       )}
 
       <Modal
-        className="food-modal"
+        className='food-modal'
         show={isOrderTimeout || !isOpenOrder}
         onHide={() => {}}
-        backdrop="static"
+        backdrop='static'
         keyboard={false}
-        size="lg"
-        aria-labelledby="contained-modal-title-vcenter"
+        size='lg'
+        aria-labelledby='contained-modal-title-vcenter'
         centered
       >
-        <Modal.Body className="food-modal__body">
+        <Modal.Body className='food-modal__body'>
           <img
-            className="timeout-icon"
+            className='timeout-icon'
             src={ForbidenOrder}
-            alt="forbiden-order"
+            alt='forbiden-order'
           />
           {isOrderTimeout && (
-            <div className="timeout-message">
-              Thời gian order cơm hôm nay đã hết, bạn vui lòng quay lại vào lúc{" "}
-              <span className="note">9h30</span> ngày mai nhé!!!
+            <div className='timeout-message'>
+              Thời gian order cơm hôm nay đã hết, bạn vui lòng quay lại vào lúc{' '}
+              <span className='note'>9h30</span> ngày mai nhé!!!
             </div>
           )}
           {!isOpenOrder && (
-            <div className="timeout-message">
-              Thời gian order chưa tới, bạn vui lòng quay lại vào lúc{" "}
-              <span className="note">9h30</span> nhé!!!
+            <div className='timeout-message'>
+              Thời gian order chưa tới, bạn vui lòng quay lại vào lúc{' '}
+              <span className='note'>9h30</span> nhé!!!
             </div>
           )}
         </Modal.Body>
       </Modal>
     </div>
-  );
-};
+  )
+}
 
-export default TimerCountDown;
+export default TimerCountDown
