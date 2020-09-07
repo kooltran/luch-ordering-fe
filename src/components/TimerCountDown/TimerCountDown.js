@@ -13,7 +13,7 @@ const TimerCountDown = () => {
   const day = curDate.getDate()
   const endTime = new Date(year, month, day, 10, 50, 0, 0).getTime()
 
-  const startTime = new Date(year, month, day, 0, 1, 0, 0).getTime()
+  const startTime = new Date(year, month, day, 8, 30, 0, 0).getTime()
   const currentTime = new Date().getTime()
 
   const isOpenOrder = currentTime >= startTime
