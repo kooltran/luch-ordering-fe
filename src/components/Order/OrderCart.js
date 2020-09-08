@@ -1,22 +1,29 @@
-import React, { useState } from "react";
-import classnames from "classnames";
-import { useAppContext } from "../../AppContext";
-import OrderItem from "./OrderItem";
-import { useSubmitOrder } from "./useSubmitOrder";
+import React, { useState, useEffect } from 'react'
+import classnames from 'classnames'
+import { useAppContext } from '../../AppContext'
+import CartItem from './CartItem'
+import { useSubmitOrder } from './useSubmitOrder'
 
-import CartIcon from "../../assets/cart.svg";
-import IconLoading from "../../assets/loading.svg";
+import CartIcon from '../../assets/cart.svg'
+import IconLoading from '../../assets/loading.svg'
 
-import "./Order.scss";
+import './Order.scss'
 
 const OrderCart = () => {
-  const [{ cart, submitOrder }] = useAppContext();
-  const { cartList, cartAdded } = cart;
-  const { isLoading } = submitOrder;
-  const [openCart, setOpenCart] = useState(false);
-  const submitOrders = useSubmitOrder();
+  const [{ cart, submitOrder }] = useAppContext()
+  const { cartList, isAnimateCart, isCartAdded } = cart
+  const { isLoading } = submitOrder
+  const [openCart, setOpenCart] = useState(false)
+  const submitOrders = useSubmitOrder()
+  const handleOpenCart = () => {
+    setOpenCart(!openCart)
+  }
 
-  const handleOpenCart = () => setOpenCart(!openCart);
+  useEffect(() => {
+    if (isCartAdded) {
+      setOpenCart(isCartAdded)
+    }
+  }, [isCartAdded])
 
   const handleSubmitOrder = () => {
     const orderListParams = cartList.map(order => ({
@@ -24,34 +31,34 @@ const OrderCart = () => {
       quantity: order.quantity,
       date: new Date().toDateString(),
       paid: false
-    }));
-    submitOrders(orderListParams);
-  };
+    }))
+    submitOrders(orderListParams)
+  }
 
   return (
-    <div className="cart-wrapper">
+    <div className='cart-wrapper'>
       <div
-        className={classnames("cart-icon", { shake: cartAdded })}
+        className={classnames('cart-icon', { shake: isAnimateCart })}
         onClick={handleOpenCart}
       >
-        <img src={CartIcon} alt="cart-icon" />
-        <span className="cart-qty">{cartList.length}</span>
+        <img src={CartIcon} alt='cart-icon' />
+        <span className='cart-qty'>{cartList.length}</span>
       </div>
       <div
-        className={classnames("cart-content", {
+        className={classnames('cart-content', {
           show: openCart && cartList.length
         })}
       >
-        {isLoading && <img className="cart-loading" src={IconLoading} alt="" />}
+        {isLoading && <img className='cart-loading' src={IconLoading} alt='' />}
         {cartList.map(order => (
-          <OrderItem key={order.id} order={order} />
+          <CartItem key={order.id} order={order} />
         ))}
-        <button className="btn-order" onClick={handleSubmitOrder}>
+        <button className='btn-order' onClick={handleSubmitOrder}>
           Order
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default OrderCart;
+export default OrderCart

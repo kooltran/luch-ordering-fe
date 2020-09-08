@@ -3,13 +3,28 @@ import React, { useState } from 'react'
 import { convertToLongDate } from '../../helpers'
 import { checkPaid } from '../../api/order'
 import { useDeleteOrder } from './useDeleteOrder'
-
-import RemoveIcon from '../../assets/cross.svg'
 import { useAppContext } from '../../AppContext'
 
-const OrderItem = ({ order, isAdmin }) => {
+import { Modal, Button } from 'antd'
+
+import RemoveIcon from '../../assets/cross.svg'
+
+const OrderItem = ({ order, isAdmin, isAllOrders }) => {
   const [isPaid, setPaid] = useState(order.paid)
-  const [{ orders }, dispatch] = useAppContext()
+  const {
+    quantity,
+    dish: { name, price },
+    user: { username },
+    date
+  } = order
+
+  const [
+    {
+      orders: { deleteOrderRequest }
+    }
+  ] = useAppContext()
+  const [isOpenModal, setOpenModal] = useState(false)
+
   const removeOrder = useDeleteOrder()
 
   const handChangePaid = ({ target: { checked } }) => {
@@ -21,24 +36,52 @@ const OrderItem = ({ order, isAdmin }) => {
     removeOrder(order)
   }
 
+  const handleOpenConfirmModal = () => setOpenModal(true)
+
+  const handleCloseConfirmModal = () => setOpenModal(false)
+
   return (
     <div key={order._id} className='order-item'>
-      <span className='name'>{order.user.username}</span>
-      <span className='quantity'>{order.quantity}</span>
-      <span className='date'>{convertToLongDate(order.date)}</span>
-      <span className='dish-name'>{order.dish.name}</span>
-      <span className='price'>{order.dish.price}</span>
+      <span className='name'>{username}</span>
+      <span className='quantity'>{quantity}</span>
+      <span className='dish-name'>{name}</span>
+      {!isAllOrders && <span className='date'>{convertToLongDate(date)}</span>}
+      <span className='price'>{`${
+        parseInt(price.slice(0, 2)) * quantity
+      },000đ`}</span>
       {isAdmin && (
         <>
           <span className='paid'>
             <input type='checkbox' onChange={handChangePaid} checked={isPaid} />
             <span className='check-mask'></span>
           </span>
-          <span className='delete' onClick={handleDeleteOrder}>
+          <span className='delete' onClick={handleOpenConfirmModal}>
             <img src={RemoveIcon} alt='delete-order' />
           </span>
         </>
       )}
+
+      <Modal
+        className='order-item__modal'
+        visible={isOpenModal}
+        onCancel={handleCloseConfirmModal}
+        footer={[
+          <Button size='large' key='back' onClick={handleCloseConfirmModal}>
+            Đóng
+          </Button>,
+          <Button
+            key='submit'
+            size='large'
+            type='primary'
+            loading={deleteOrderRequest}
+            onClick={handleDeleteOrder}
+          >
+            Xoá
+          </Button>
+        ]}
+      >
+        <p>Bạn có chắc muốn xoá chứ???</p>
+      </Modal>
     </div>
   )
 }

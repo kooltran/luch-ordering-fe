@@ -20,7 +20,8 @@ const currentUserInitState = {
 
 const cartReducerInitState = {
   cartList: [],
-  cartAdded: false
+  isAnimateCart: false,
+  isCartAdded: false
 }
 
 const submitorderReducerInitState = {
@@ -31,7 +32,7 @@ const submitorderReducerInitState = {
 
 const orderListReducerInitState = {
   orderList: [],
-  getOrdersRequest: false,
+  isOrdersLoading: false,
   getOrdersFail: null,
   deleteOrderRequest: false,
   deleteOrderFail: null

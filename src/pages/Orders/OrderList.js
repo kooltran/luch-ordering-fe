@@ -44,51 +44,50 @@ const Orders = () => {
   const orderListGroupByDate = groupByNTotal(orderList, 'date')
 
   return (
-    <div className='order-wrapper'>
-      <h1 className='order-title'>All Orders List</h1>
-      {/* {orderList.length !== 0 && (
-        <div className="order-total">
-          <h3 className="title">Total List</h3>
-          {orderListTotalQty.map(order => (
-            <div key={order.name} className="total-item">
-              <span>{order.name}</span>
-              <span>{order.qty}</span>
-            </div>
-          ))}
-        </div>
-      )} */}
-      {isLoading && (
-        <img className='icon-loading' src={IconLoading} alt='loading-spinner' />
-      )}
-      {sortedList.length !== 0 && (
-        <div className='order-content'>
-          <div className='order-item__title'>
-            <span>Người Order</span>
-            <span>Số Lượng</span>
-            <span>Ngày Order</span>
-            <span>Tên Món</span>
-            <span>Giá</span>
-            {isAdmin && (
-              <>
-                <span className='paid'>Paid</span>
-                <span className='delete'></span>
-              </>
-            )}
+    <div className='page'>
+      <div className='order-wrapper'>
+        <h1 className='order-title'>All Orders List</h1>
+        {isLoading && (
+          <img
+            className='icon-loading'
+            src={IconLoading}
+            alt='loading-spinner'
+          />
+        )}
+        {sortedList.length !== 0 && (
+          <div className='order-content'>
+            {Object.keys(orderListGroupByDate).map(item => {
+              return (
+                <>
+                  <div className='order-item__date-title' key={item}>
+                    {item}
+                  </div>
+                  <div className='order-item__title'>
+                    <span>Người Order</span>
+                    <span>Số Lượng</span>
+                    <span>Tên món</span>
+                    <span>Giá</span>
+                    {isAdmin && (
+                      <>
+                        <span className='paid'>Paid</span>
+                        <span className='delete'></span>
+                      </>
+                    )}
+                  </div>
+                  {orderListGroupByDate[item].map(order => (
+                    <OrderItem
+                      key={order._id}
+                      order={order}
+                      isAdmin
+                      isAllOrders
+                    />
+                  ))}
+                </>
+              )
+            })}
           </div>
-          {Object.keys(orderListGroupByDate).map(item => {
-            return (
-              <>
-                <div className='order-item__date-title' key={item}>
-                  {item}
-                </div>
-                {orderListGroupByDate[item].map(order => (
-                  <OrderItem key={order._id} order={order} isAdmin />
-                ))}
-              </>
-            )
-          })}
-        </div>
-      )}
+        )}
+      </div>
     </div>
   )
 }

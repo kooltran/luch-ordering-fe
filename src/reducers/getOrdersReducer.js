@@ -12,7 +12,7 @@ export const getOrdersReducer = (state, action) => {
     case GET_ORDERS_REQUEST:
       return {
         ...state,
-        getOrdersRequest: true,
+        isOrdersLoading: true,
         orderList: [],
         getOrdersFail: null,
         deleteOrderRequest: false,
@@ -21,7 +21,7 @@ export const getOrdersReducer = (state, action) => {
     case GET_ORDERS_SUCCESS:
       return {
         ...state,
-        getOrdersRequest: false,
+        isOrdersLoading: false,
         orderList: action.payload,
         getOrdersFail: null,
         deleteOrderRequest: false,
@@ -30,7 +30,7 @@ export const getOrdersReducer = (state, action) => {
     case GET_ORDERS_FAIL:
       return {
         ...state,
-        getOrdersRequest: false,
+        isOrdersLoading: false,
         orderList: [],
         getOrdersFail: action.payload.message,
         deleteOrderRequest: false,
@@ -39,7 +39,7 @@ export const getOrdersReducer = (state, action) => {
     case DELETE_ORDER_REQUEST: {
       return {
         ...state,
-        getOrdersRequest: false,
+        isOrdersLoading: false,
         getOrdersFail: null,
         deleteOrderRequest: true,
         deleteOrderFail: null
@@ -50,7 +50,7 @@ export const getOrdersReducer = (state, action) => {
       const { orderList } = state
       return {
         ...state,
-        getOrdersRequest: false,
+        isOrdersLoading: false,
         orderList: orderList.filter(order => order._id !== deletedOrder._id),
         getOrdersFail: null,
         deleteOrderRequest: false,
@@ -60,7 +60,7 @@ export const getOrdersReducer = (state, action) => {
     case DELETE_ORDER_FAIL: {
       return {
         ...state,
-        getOrdersRequest: false,
+        isOrdersLoading: false,
         orderList: [],
         getOrdersFail: null,
         deleteOrderRequest: false,

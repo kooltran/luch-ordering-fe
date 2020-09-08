@@ -10,7 +10,7 @@ const monthsName = [
   'Sep',
   'Oct',
   'Nov',
-  'Dec',
+  'Dec'
 ]
 
 export const convertSecondToHours = seconds => {
@@ -29,9 +29,7 @@ export const convertToLongDate = dateString => {
   }
 
   const d = new Date(dateString)
-  // const h = ('0' + d.getHours()).slice(-2)
-  // const min = ('0' + d.getMinutes()).slice(-2)
-  // const sec = ('0' + d.getSeconds()).slice(-2)
+
   const day = d.getDate()
   const month = d.getMonth()
   const monthName = monthsName[month]
@@ -58,11 +56,16 @@ const countDown = setInterval((year, month, day) => {
   }
 }, 1000)
 
-export const groupByNTotal = (array, key) => {
+export const groupByNTotal = (array, key, subKey = null) => {
   return array.reduce((acc, item) => {
     const sortkey = item[key]
-    acc[sortkey] = acc[sortkey] || []
-    acc[sortkey].push(item)
+    if (typeof sortkey === 'object' && subKey) {
+      acc[sortkey[subKey]] = acc[sortkey[subKey]] || []
+      acc[sortkey[subKey]].push(item)
+    } else {
+      acc[sortkey] = acc[sortkey] || []
+      acc[sortkey].push(item)
+    }
     return acc
   }, {})
 }

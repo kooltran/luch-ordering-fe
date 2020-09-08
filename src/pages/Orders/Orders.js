@@ -17,7 +17,7 @@ import IconLoading from '../../assets/loading.svg'
 const Orders = () => {
   const [
     {
-      orders: { orderList, isLoading }
+      orders: { orderList, isOrdersLoading }
     },
     dispatch
   ] = useAppContext()
@@ -74,6 +74,13 @@ const Orders = () => {
     <div className='page'>
       <div className='order-wrapper'>
         <h1 className='order-title'>Orders List</h1>
+        {isOrdersLoading && (
+          <img
+            className='icon-loading'
+            src={IconLoading}
+            alt='loading-spinner'
+          />
+        )}
         {orderList.length !== 0 && (
           <div className='order-total'>
             <h3 className='title'>Total List</h3>
@@ -95,13 +102,6 @@ const Orders = () => {
               <span>{`${totalPriceDishes}.000đ`}</span>
             </div>
           </div>
-        )}
-        {isLoading && (
-          <img
-            className='icon-loading'
-            src={IconLoading}
-            alt='loading-spinner'
-          />
         )}
         {sortedList.length !== 0 && (
           <div className='order-content'>

@@ -2,7 +2,7 @@ import {
   ADD_CART_ITEM,
   DELETE_CART_ITEM,
   DELETE_CART,
-  REMOVE_CART_ADDED,
+  REMOVE_CART_ADDED
 } from '../actions/actionTypes'
 
 export const cartReducer = (state, action) => {
@@ -11,10 +11,11 @@ export const cartReducer = (state, action) => {
       return {
         ...state,
         cartList: action.payload,
-        cartAdded: true,
+        isAnimateCart: true,
+        isCartAdded: true
       }
     case REMOVE_CART_ADDED: {
-      return { ...state, cartAdded: false }
+      return { ...state, isCartAdded: true, isAnimateCart: false }
     }
     case DELETE_CART_ITEM: {
       const { cartList } = state
@@ -22,14 +23,17 @@ export const cartReducer = (state, action) => {
       return {
         ...state,
         cartList: cartList.filter(cart => cart.id !== selectedCartItem.id),
-        cartAdded: false,
+        isAnimateCart: true,
+
+        isCartAdded: false
       }
     }
     case DELETE_CART: {
       return {
         ...state,
         cartList: [],
-        cartAdded: false,
+        isAnimateCart: false,
+        isCartAdded: false
       }
     }
     default:

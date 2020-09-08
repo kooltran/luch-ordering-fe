@@ -1,79 +1,81 @@
-import React, { useEffect, useState } from "react";
-import MenuList from "../../components/Menu/Menu";
-import OrderCart from "../../components/Order/OrderCart";
+import React, { useEffect, useState } from 'react'
+import MenuList from '../../components/Menu/Menu'
+import OrderCart from '../../components/Order/OrderCart'
 
-import TimerCountDown from "../../components/TimerCountDown/TimerCountDown";
-import { useAppContext } from "../../AppContext";
+import TimerCountDown from '../../components/TimerCountDown/TimerCountDown'
+import { useAppContext } from '../../AppContext'
 
-import Congrats from "../../assets/congrats.svg";
-import OrderList from "../../assets/checklist.svg";
-import { useHistory } from "react-router-dom";
+import Congrats from '../../assets/congrats.svg'
+import OrderList from '../../assets/checklist.svg'
+import { useHistory } from 'react-router-dom'
 
-import "react-toastify/dist/ReactToastify.css";
-import Modal from "react-bootstrap/Modal";
+import 'react-toastify/dist/ReactToastify.css'
 
-import "./Home.scss";
+import { Modal, Button } from 'antd'
+
+import './Home.scss'
 
 const Home = () => {
-  const [{ submitOrder }] = useAppContext();
-  const { createOrderSuccess } = submitOrder;
-  const [show, setOpen] = useState(createOrderSuccess);
-  let history = useHistory();
+  const [{ submitOrder }] = useAppContext()
+  const { createOrderSuccess } = submitOrder
+  const [show, setOpen] = useState(createOrderSuccess)
+  let history = useHistory()
 
-  const roles = localStorage.getItem("roles");
-  const isAdmin = roles === "admin";
+  const roles = localStorage.getItem('roles')
+  const isAdmin = roles === 'admin'
 
   useEffect(() => {
     if (createOrderSuccess) {
-      setOpen(createOrderSuccess);
+      setOpen(createOrderSuccess)
     }
-  }, [createOrderSuccess]);
+  }, [createOrderSuccess])
 
   const handleCloseModal = () => {
-    setOpen(false);
-  };
+    setOpen(false)
+  }
 
   const handleGotoOrder = () => {
-    history.push("/orders");
-  };
+    history.push('/orders')
+  }
 
   return (
-    <div className="page">
-      <h1 className="text-uppercase text-center">SP Team Lunch Ordering</h1>
+    <div className='page'>
+      <h1 className='text-uppercase text-center'>SP Team Lunch Ordering</h1>
       {!isAdmin && <TimerCountDown />}
-      <a href="/lunch-ordering-fe/#/orders" className="icon-orders">
-        <img src={OrderList} alt="checklist" />
+      <a href='/lunch-ordering-fe/#/orders' className='icon-orders'>
+        <img src={OrderList} alt='checklist' />
       </a>
       <OrderCart />
       <MenuList />
+
       <Modal
-        className="congrats-modal food-modal"
-        show={show}
-        onHide={handleCloseModal}
-        backdrop="static"
-        keyboard={true}
-        size="lg"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
+        className='congrats-modal'
+        visible={show}
+        onCancel={handleCloseModal}
+        width={'60vw'}
+        height={'60vh'}
+        footer={[
+          <Button size='large' key='back' onClick={handleCloseModal}>
+            Đóng
+          </Button>,
+          <Button
+            key='submit'
+            size='large'
+            type='primary'
+            onClick={handleGotoOrder}
+          >
+            Xem Order
+          </Button>
+        ]}
       >
-        <Modal.Body className="food-modal__body">
-          <img className="modal-icon" src={Congrats} alt="forbiden-order" />
-          <div className="congrats-message">
-            Thank you! Bạn đã order thành công!!
-            <p>Chúc Ngon miệng</p>
-          </div>
-          <div className="congrats-button">
-            <button className="btn-close" onClick={handleCloseModal}>
-              Đóng
-            </button>
-            <button className="go-order" onClick={handleGotoOrder}>
-              Xem order
-            </button>
-          </div>
-        </Modal.Body>
+        <img className='modal-icon' src={Congrats} alt='forbiden-order' />
+        <div className='congrats-message'>
+          Thank you! Bạn đã order thành công!!
+          <p>Chúc Ngon miệng</p>
+        </div>
       </Modal>
     </div>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home

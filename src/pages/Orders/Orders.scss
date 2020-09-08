@@ -1,6 +1,7 @@
 .order {
   &-wrapper {
     margin: 20px 0 50px;
+    text-align: center;
   }
 
   &-title {
@@ -49,8 +50,7 @@
       border: 1px solid #333;
       text-align: right;
       font-size: 20px;
-      font-weight: 600;
-      color: red;
+      color: #e81515;
 
       span {
         display: flex;
@@ -89,8 +89,7 @@
 
         &:last-child {
           border-right: 0;
-          // justify-content: flex-end;
-          color: red;
+          color: #3626b9;
         }
       }
     }
@@ -116,7 +115,7 @@
       justify-content: space-between;
       align-items: center;
       color: #fff;
-      padding: 10px 5px;
+      padding: 10px 15px;
       background-color: #2f6d8c;
 
       span {
@@ -126,11 +125,15 @@
         &:nth-child(2) {
           width: 10%;
         }
+
+        &:first-child {
+          text-align: left;
+        }
       }
 
       .paid,
       .delete {
-        width: 8%;
+        width: 6%;
       }
     }
 
@@ -141,6 +144,35 @@
       background: #2e4c5d;
       color: #fff;
       padding: 10px 0;
+    }
+
+    &__modal {
+      .ant-modal-footer {
+        text-align: center;
+        border: 0;
+        padding-bottom: 20px;
+
+        button {
+          font-size: 18px;
+
+          + button {
+            margin-left: 20px;
+          }
+        }
+      }
+
+      .ant-modal-body {
+        display: flex;
+        justify-content: center;
+        height: 150px;
+        align-items: center;
+
+        p {
+          font-size: 22px;
+          margin: 0;
+          color: #ea2a67;
+        }
+      }
     }
 
     &:nth-child(2n + 1) {
@@ -166,15 +198,12 @@
     }
 
     .paid {
-      width: 10%;
+      width: 6%;
       text-align: center;
       position: relative;
       height: 25px;
 
       .check-mask {
-        position: absolute;
-        top: 0;
-        right: 30px;
         width: 25px;
         height: 25px;
         display: inline-block;
@@ -186,7 +215,7 @@
       input[type='checkbox'] {
         position: absolute;
         top: 0;
-        right: 30px;
+        right: 20px;
         width: 25px;
         height: 25px;
         opacity: 0;
@@ -203,7 +232,8 @@
     }
 
     .delete {
-      width: 8%;
+      width: 6%;
+      cursor: pointer;
 
       img {
         width: 20px;
