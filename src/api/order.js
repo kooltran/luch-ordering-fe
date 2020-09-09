@@ -46,3 +46,12 @@ export const deleteOrder = order => {
     })
     .then(res => res.data)
 }
+
+export const getAllOrderDishes = () => {
+  const token = localStorage.getItem('token')
+  return axios
+    .get(`${DOMAIN}/orders/get-all-orders`, {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+    .then(res => res.data)
+}

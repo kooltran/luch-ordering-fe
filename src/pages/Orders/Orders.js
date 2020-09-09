@@ -103,7 +103,7 @@ const Orders = () => {
             </div>
           </div>
         )}
-        {sortedList.length !== 0 && (
+        {orderList.length !== 0 && (
           <div className='order-content'>
             <div className='order-item__title'>
               <span>Người Order</span>
@@ -118,7 +118,7 @@ const Orders = () => {
                 </>
               )}
             </div>
-            {sortedList.map(order => (
+            {orderList.map(order => (
               <OrderItem key={order._id} order={order} isAdmin={isAdmin} />
             ))}
           </div>

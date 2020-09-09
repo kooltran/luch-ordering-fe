@@ -6,7 +6,7 @@ import {
   getAllOrdersSuccess,
   getAllOrdersFail
 } from '../../actions/orderAction'
-import { getAllOrders } from '../../api/order'
+import { getAllOrders, getAllOrderDishes } from '../../api/order'
 import OrderItem from './OrderItem'
 import { groupByNTotal } from '../../helpers'
 
@@ -35,14 +35,23 @@ const Orders = () => {
       }
     }
     getOrderList()
+    // getAllOrderDishes()
   }, [dispatch])
 
-  const sortedList = orderList.sort((a, b) =>
-    a.dish.name.localeCompare(b.dish_name)
-  )
+  // const sortedList = orderList.sort((a, b) =>
+  //   a.dish.name.localeCompare(b.dish_name)
+  // )
 
+  // const kaka = orderList.reduce((acc, order) => {
+  //   const key = order['date']
+  //   acc[key] = { data: acc[key] || [] }
+  //   console.log(acc[key], 'accKey')
+  //   acc[key].data.push(order)
+  //   console.log(acc)
+  //   return acc
+  // }, {})
+  // console.log(kaka)
   const orderListGroupByDate = groupByNTotal(orderList, 'date')
-
   return (
     <div className='page'>
       <div className='order-wrapper'>
@@ -54,7 +63,7 @@ const Orders = () => {
             alt='loading-spinner'
           />
         )}
-        {sortedList.length !== 0 && (
+        {orderList.length !== 0 && (
           <div className='order-content'>
             {Object.keys(orderListGroupByDate).map(item => {
               return (

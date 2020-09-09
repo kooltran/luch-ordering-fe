@@ -2,13 +2,19 @@ import { useAppContext } from '../../AppContext'
 import {
   deleteOrderRequest,
   deleteOrderSuccess,
-  deleteOrderFail
+  deleteOrderFail,
+  getAllOrdersSuccess
 } from '../../actions/orderAction'
 import { deleteOrder } from '../../api/order'
 import { useCallback } from 'react'
 
 export const useDeleteOrder = () => {
-  const [, dispatch] = useAppContext()
+  const [
+    {
+      allOrders: { orderList }
+    },
+    dispatch
+  ] = useAppContext()
 
   const removeOrder = useCallback(
     async order => {
@@ -16,11 +22,15 @@ export const useDeleteOrder = () => {
       try {
         const res = await deleteOrder(order)
         dispatch(deleteOrderSuccess(res))
+        const remainingOrders = orderList.filter(
+          order => order._id !== res.data._id
+        )
+        dispatch(getAllOrdersSuccess(remainingOrders))
       } catch (error) {
         dispatch(deleteOrderFail(error))
       }
     },
-    [dispatch]
+    [dispatch, orderList]
   )
 
   return removeOrder
