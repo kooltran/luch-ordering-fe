@@ -108,8 +108,8 @@ const Orders = () => {
             <div className='order-item__title'>
               <span>Người Order</span>
               <span>Số Lượng</span>
-              <span>Ngày Order</span>
               <span className='dish-name'>Tên Món</span>
+              <span>Ngày Order</span>
               <span>Giá</span>
               {isAdmin && (
                 <>

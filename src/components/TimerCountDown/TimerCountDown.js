@@ -11,7 +11,7 @@ const TimerCountDown = () => {
   const year = curDate.getFullYear()
   const month = curDate.getMonth()
   const day = curDate.getDate()
-  const endTime = new Date(year, month, day, 10, 55, 0, 0).getTime()
+  const endTime = new Date(year, month, day, 10, 58, 0, 0).getTime()
 
   const startTime = new Date(year, month, day, 8, 30, 0, 0).getTime()
   const currentTime = new Date().getTime()
@@ -88,7 +88,7 @@ const TimerCountDown = () => {
 
       <Modal
         className='timeout-modal'
-        visible={true}
+        visible={isOrderTimeout || !isOpenOrder}
         onCancel={() => {}}
         width={'60vw'}
         height={'60vh'}
@@ -112,37 +112,6 @@ const TimerCountDown = () => {
           </div>
         )}
       </Modal>
-
-      {/* <Modal
-        className='food-modal'
-        show={isOrderTimeout || !isOpenOrder}
-        onHide={() => {}}
-        backdrop='static'
-        keyboard={false}
-        size='lg'
-        aria-labelledby='contained-modal-title-vcenter'
-        centered
-      >
-        <Modal.Body className='food-modal__body'>
-          <img
-            className='timeout-icon'
-            src={ForbidenOrder}
-            alt='forbiden-order'
-          />
-          {isOrderTimeout && (
-            <div className='timeout-message'>
-              Thời gian order cơm hôm nay đã hết, bạn vui lòng quay lại vào lúc{' '}
-              <span className='note'>8h00</span> ngày mai nhé!!!
-            </div>
-          )}
-          {!isOpenOrder && (
-            <div className='timeout-message'>
-              Thời gian order chưa tới, bạn vui lòng quay lại vào lúc{' '}
-              <span className='note'>8h00</span> nhé!!!
-            </div>
-          )}
-        </Modal.Body>
-      </Modal> */}
     </div>
   )
 }
