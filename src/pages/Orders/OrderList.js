@@ -76,6 +76,7 @@ const Orders = () => {
                   <div className='order-item__title'>
                     <span>Người Order</span>
                     <span>Số Lượng</span>
+                    <span>Tên Món</span>
                     <span>Giá</span>
                     {isAdmin && (
                       <>
