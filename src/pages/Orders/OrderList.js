@@ -38,20 +38,22 @@ const Orders = () => {
     // getAllOrderDishes()
   }, [dispatch])
 
-  // const sortedList = orderList.sort((a, b) =>
-  //   a.dish.name.localeCompare(b.dish_name)
-  // )
+  const sortedList = orderList.sort((a, b) =>
+    a.dish.name.localeCompare(b.dish_name)
+  )
 
   // const kaka = orderList.reduce((acc, order) => {
   //   const key = order['date']
-  //   acc[key] = { data: acc[key] || [] }
-  //   console.log(acc[key], 'accKey')
-  //   acc[key].data.push(order)
-  //   console.log(acc)
+  //   if (acc[key] && acc[key].data) {
+  //     acc[key].data.push(order)
+  //   } else {
+  //     acc[key] = { data: acc[key] || [], paidProvider: false }
+  //     acc[key].data.push(order)
+  //   }
   //   return acc
   // }, {})
   // console.log(kaka)
-  const orderListGroupByDate = groupByNTotal(orderList, 'date')
+  const orderListGroupByDate = groupByNTotal(sortedList, 'date')
   return (
     <div className='page'>
       <div className='order-wrapper'>
@@ -63,7 +65,7 @@ const Orders = () => {
             alt='loading-spinner'
           />
         )}
-        {orderList.length !== 0 && (
+        {sortedList.length !== 0 && (
           <div className='order-content'>
             {Object.keys(orderListGroupByDate).map(item => {
               return (
@@ -74,7 +76,6 @@ const Orders = () => {
                   <div className='order-item__title'>
                     <span>Người Order</span>
                     <span>Số Lượng</span>
-                    <span>Tên món</span>
                     <span>Giá</span>
                     {isAdmin && (
                       <>

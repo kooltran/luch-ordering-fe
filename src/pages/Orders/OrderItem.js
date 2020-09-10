@@ -44,7 +44,7 @@ const OrderItem = ({ order, isAdmin, isAllOrders }) => {
     <div key={order._id} className='order-item'>
       <span className='name'>{username}</span>
       <span className='quantity'>{quantity}</span>
-      <span className='dish-name'>{name}</span>
+      {!isAllOrders && <span className='dish-name'>{name}</span>}
       {!isAllOrders && <span className='date'>{convertToLongDate(date)}</span>}
       <span className='price'>{`${
         parseInt(price.slice(0, 2)) * quantity
