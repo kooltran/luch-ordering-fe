@@ -1,5 +1,5 @@
 import { getMenuReducer } from './getMenuReducer'
-import { getCurUserReducer } from './getCurrentUserReducer'
+import { usersReducer } from './usersReducer'
 import { cartReducer } from './cartReducer'
 import { submitOrderReducer } from './submitOrderReducer'
 import { getOrdersReducer } from './getOrdersReducer'
@@ -13,8 +13,9 @@ const menuInitState = {
   getMenuFail: null
 }
 
-const currentUserInitState = {
+const usersInitState = {
   user: {},
+  users: [],
   userFail: null
 }
 
@@ -50,7 +51,7 @@ const orderTimeoutInitState = {
 
 const [rootReducer, initialStateCombined] = combineReducers({
   menu: [getMenuReducer, menuInitState],
-  currentUser: [getCurUserReducer, currentUserInitState],
+  users: [usersReducer, usersInitState],
   cart: [cartReducer, cartReducerInitState],
   submitOrder: [submitOrderReducer, submitorderReducerInitState],
   orders: [getOrdersReducer, orderListReducerInitState],

@@ -55,3 +55,12 @@ export const getAllOrderDishes = () => {
     })
     .then(res => res.data)
 }
+
+export const getPayment = () => {
+  const token = localStorage.getItem('token')
+  return axios
+    .get(`${DOMAIN}/orders/payment`, {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+    .then(res => res.data)
+}

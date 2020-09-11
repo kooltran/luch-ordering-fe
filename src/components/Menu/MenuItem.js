@@ -8,8 +8,8 @@ import { REDIRECT_URL } from '../../constants'
 
 const MenuItem = ({ item }) => {
   const [quantity, setQty] = useState(1)
-  const [{ currentUser, cart, orderTimeout }, dispatch] = useAppContext()
-  const { user } = currentUser
+  const [{ users, cart, orderTimeout }, dispatch] = useAppContext()
+  const { user } = users
   const { cartList } = cart
 
   const handleAddTocart = () => {
