@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/lunch-ordering-fe/static/css/main.51ceee83.chunk.css",
-    "main.js": "/lunch-ordering-fe/static/js/main.a4520197.chunk.js",
-    "main.js.map": "/lunch-ordering-fe/static/js/main.a4520197.chunk.js.map",
+    "main.js": "/lunch-ordering-fe/static/js/main.6682cabf.chunk.js",
+    "main.js.map": "/lunch-ordering-fe/static/js/main.6682cabf.chunk.js.map",
     "runtime-main.js": "/lunch-ordering-fe/static/js/runtime-main.7725a23b.js",
     "runtime-main.js.map": "/lunch-ordering-fe/static/js/runtime-main.7725a23b.js.map",
     "static/css/2.611f078b.chunk.css": "/lunch-ordering-fe/static/css/2.611f078b.chunk.css",
     "static/js/2.b3e45021.chunk.js": "/lunch-ordering-fe/static/js/2.b3e45021.chunk.js",
     "static/js/2.b3e45021.chunk.js.map": "/lunch-ordering-fe/static/js/2.b3e45021.chunk.js.map",
     "index.html": "/lunch-ordering-fe/index.html",
-    "precache-manifest.85b85df91854c594715add90a052eca0.js": "/lunch-ordering-fe/precache-manifest.85b85df91854c594715add90a052eca0.js",
+    "precache-manifest.eb47e0b1ad59a7012c67962a85a5aff8.js": "/lunch-ordering-fe/precache-manifest.eb47e0b1ad59a7012c67962a85a5aff8.js",
     "service-worker.js": "/lunch-ordering-fe/service-worker.js",
     "static/css/2.611f078b.chunk.css.map": "/lunch-ordering-fe/static/css/2.611f078b.chunk.css.map",
     "static/css/main.51ceee83.chunk.css.map": "/lunch-ordering-fe/static/css/main.51ceee83.chunk.css.map",
@@ -29,6 +29,6 @@
     "static/css/2.611f078b.chunk.css",
     "static/js/2.b3e45021.chunk.js",
     "static/css/main.51ceee83.chunk.css",
-    "static/js/main.a4520197.chunk.js"
+    "static/js/main.6682cabf.chunk.js"
   ]
 }
