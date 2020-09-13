@@ -38,6 +38,15 @@ export const checkPaid = params => {
     .then(res => res.data)
 }
 
+export const checkProviderPaid = order => {
+  const token = localStorage.getItem('token')
+  return axios
+    .post(`${DOMAIN}/orders/check-paid-provider`, order, {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+    .then(res => res.data)
+}
+
 export const deleteOrder = order => {
   const token = localStorage.getItem('token')
   return axios

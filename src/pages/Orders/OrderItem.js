@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 
 import { convertToLongDate } from '../../helpers'
-import { checkPaid } from '../../api/order'
 import { useDeleteOrder } from './useDeleteOrder'
+import { useCheckPaidOrder } from './useCheckPaidOrder'
 import { useAppContext } from '../../AppContext'
+
+import classnames from 'classnames'
 
 import { Modal, Button } from 'antd'
 
@@ -11,6 +13,12 @@ import RemoveIcon from '../../assets/cross.svg'
 
 const OrderItem = ({ order, isAdmin, isAllOrders }) => {
   const [isPaid, setPaid] = useState(order.paid)
+  const { checkPaidOrder } = useCheckPaidOrder()
+  const [
+    {
+      checkPaid: { isPaidLoading }
+    }
+  ] = useAppContext()
   const {
     quantity,
     dish: { name, price },
@@ -28,7 +36,7 @@ const OrderItem = ({ order, isAdmin, isAllOrders }) => {
   const removeOrder = useDeleteOrder()
 
   const handChangePaid = ({ target: { checked } }) => {
-    checkPaid({ id: order._id, isPaid: checked })
+    checkPaidOrder({ id: order._id, isPaid: checked })
     setPaid(checked)
   }
 
@@ -46,15 +54,25 @@ const OrderItem = ({ order, isAdmin, isAllOrders }) => {
       <span className='quantity'>{quantity}</span>
       {<span className='dish-name'>{name}</span>}
       {!isAllOrders && <span className='date'>{convertToLongDate(date)}</span>}
-      <span className='price'>{`${
-        parseInt(price.slice(0, 2)) * quantity
-      },000đ`}</span>
+      <span className='price'>{`${parseInt(price.slice(0, 2)) *
+        quantity},000đ`}</span>
       {isAdmin && (
         <>
-          <span className='paid'>
-            <input type='checkbox' onChange={handChangePaid} checked={isPaid} />
-            <span className='check-mask'></span>
-          </span>
+          <div className='paid'>
+            <span className='order-checkbox'>
+              <input
+                type='checkbox'
+                onChange={handChangePaid}
+                checked={isPaid}
+                disabled={isPaidLoading}
+              />
+              <span
+                className={classnames('check-mask', {
+                  'is-disabled': isPaidLoading
+                })}
+              ></span>
+            </span>
+          </div>
           <span className='delete' onClick={handleOpenConfirmModal}>
             <img src={RemoveIcon} alt='delete-order' />
           </span>

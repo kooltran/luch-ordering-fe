@@ -89,8 +89,40 @@ body {
   border-top: 1px solid #333;
 }
 
-.Toastify__toast {
-  border-radius: 5px;
-  font-size: 20px;
-  padding: 20px;
+.order-checkbox {
+  position: relative;
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+
+  .check-mask {
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    border: 1px solid #333;
+    border-radius: 2px;
+    content: '';
+
+    &.is-disabled {
+      opacity: 0.4;
+    }
+  }
+
+  input[type='checkbox'] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 25px;
+    height: 25px;
+    opacity: 0;
+    z-index: 10;
+
+    &:checked {
+      + .check-mask {
+        background-image: url('./assets/tick.svg');
+        border-color: green;
+        background-size: cover;
+      }
+    }
+  }
 }

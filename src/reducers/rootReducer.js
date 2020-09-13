@@ -5,6 +5,7 @@ import { submitOrderReducer } from './submitOrderReducer'
 import { getOrdersReducer } from './getOrdersReducer'
 import { getAllOrdersReducer } from './getAllOrdersReducer'
 import { setOrderTimeout } from './setOrderTimeout'
+import { checkPaidReducer } from './checkPaidReducer'
 import combineReducers from 'react-combine-reducers'
 
 const menuInitState = {
@@ -40,13 +41,19 @@ const orderListReducerInitState = {
 }
 
 const allOrderListReducerInitState = {
-  orderList: [],
+  allOrderList: [],
   isLoading: false,
   getOrdersFail: null
 }
 
 const orderTimeoutInitState = {
   isOrderTimeout: false
+}
+
+const checkPaidInitState = {
+  isPaidLoading: false,
+  isPaidSuccess: false,
+  checkPaidFail: null
 }
 
 const [rootReducer, initialStateCombined] = combineReducers({
@@ -56,7 +63,8 @@ const [rootReducer, initialStateCombined] = combineReducers({
   submitOrder: [submitOrderReducer, submitorderReducerInitState],
   orders: [getOrdersReducer, orderListReducerInitState],
   orderTimeout: [setOrderTimeout, orderTimeoutInitState],
-  allOrders: [getAllOrdersReducer, allOrderListReducerInitState]
+  allOrders: [getAllOrdersReducer, allOrderListReducerInitState],
+  checkPaid: [checkPaidReducer, checkPaidInitState]
 })
 
 export { rootReducer, initialStateCombined }

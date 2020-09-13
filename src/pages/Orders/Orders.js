@@ -26,7 +26,7 @@ const Orders = () => {
   const isAdmin = roles === 'admin'
 
   useEffect(() => {
-    const getOrderList = async orders => {
+    const getOrderList = async () => {
       dispatch(getOrdersRequest())
       try {
         const res = await getOrders()

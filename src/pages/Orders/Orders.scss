@@ -2,6 +2,12 @@
   &-wrapper {
     margin: 20px 0 50px;
     text-align: center;
+
+    .btn-switch {
+      position: absolute;
+      right: 0;
+      top: 50px;
+    }
   }
 
   &-title {
@@ -107,6 +113,7 @@
     align-items: center;
     border-bottom: 1px solid #ddd;
     padding: 10px 15px;
+    background: #fff;
 
     &__title {
       display: flex;
@@ -138,12 +145,23 @@
     }
 
     &__date-title {
+      position: relative;
       text-align: center;
       font-size: 16px;
       font-weight: 600;
       background: #2e4c5d;
       color: #fff;
       padding: 10px 0;
+
+      .paid-provider {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+
+        .check-mask {
+          background-color: #fff;
+        }
+      }
     }
 
     &__modal {
@@ -183,7 +201,7 @@
       border-bottom: 0;
     }
 
-    span {
+    > span {
       width: 15%;
       text-align: center;
 
@@ -202,33 +220,6 @@
       text-align: center;
       position: relative;
       height: 25px;
-
-      .check-mask {
-        width: 25px;
-        height: 25px;
-        display: inline-block;
-        border: 1px solid #333;
-        border-radius: 2px;
-        content: '';
-      }
-
-      input[type='checkbox'] {
-        position: absolute;
-        top: 0;
-        right: 20px;
-        width: 25px;
-        height: 25px;
-        opacity: 0;
-        z-index: 10;
-
-        &:checked {
-          + .check-mask {
-            background-image: url('../../assets/tick.svg');
-            border-color: green;
-            background-size: cover;
-          }
-        }
-      }
     }
 
     .delete {
@@ -238,6 +229,71 @@
       img {
         width: 20px;
         height: 20px;
+      }
+    }
+  }
+
+  &-user {
+    display: flex;
+    flex-direction: column;
+
+    &__name {
+      position: relative;
+      text-align: center;
+      font-size: 16px;
+      font-weight: 600;
+      background: #2e4c5d;
+      color: #fff;
+      padding: 10px 0;
+      text-transform: uppercase;
+    }
+
+    &__title {
+      display: flex;
+      font-size: 18px;
+      font-weight: 600;
+      justify-content: space-between;
+      align-items: center;
+      color: #fff;
+      padding: 10px 15px;
+      background-color: #2f6d8c;
+
+      span {
+        width: 25%;
+
+        &:first-child {
+          text-align: left;
+        }
+
+        &:last-child {
+          text-align: right;
+        }
+      }
+    }
+
+    &__item {
+      display: flex;
+      font-size: 16px;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #ddd;
+      padding: 10px 15px;
+      background: #fff;
+
+      &:nth-child(2n + 1) {
+        background: #eaeaea;
+      }
+
+      span {
+        width: 25%;
+
+        &:first-child {
+          text-align: left;
+        }
+
+        &:last-child {
+          text-align: right;
+        }
       }
     }
   }
