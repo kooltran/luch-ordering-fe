@@ -22,10 +22,10 @@ export const useDeleteOrder = () => {
       try {
         const res = await deleteOrder(order)
         dispatch(deleteOrderSuccess(res))
-        const remainingOrders = orderList.filter(
-          order => order._id !== res.data._id
-        )
-        dispatch(getAllOrdersSuccess(remainingOrders))
+        // const remainingOrders = orderList.filter(
+        //   order => order._id !== res.data._id
+        // )
+        // dispatch(getAllOrdersSuccess(remainingOrders))
       } catch (error) {
         dispatch(deleteOrderFail(error))
       }
