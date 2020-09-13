@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/lunch-ordering-fe/static/css/main.d3ea3807.chunk.css",
-    "main.js": "/lunch-ordering-fe/static/js/main.027a4467.chunk.js",
-    "main.js.map": "/lunch-ordering-fe/static/js/main.027a4467.chunk.js.map",
+    "main.css": "/lunch-ordering-fe/static/css/main.51ceee83.chunk.css",
+    "main.js": "/lunch-ordering-fe/static/js/main.a4520197.chunk.js",
+    "main.js.map": "/lunch-ordering-fe/static/js/main.a4520197.chunk.js.map",
     "runtime-main.js": "/lunch-ordering-fe/static/js/runtime-main.7725a23b.js",
     "runtime-main.js.map": "/lunch-ordering-fe/static/js/runtime-main.7725a23b.js.map",
-    "static/css/2.d5e8013a.chunk.css": "/lunch-ordering-fe/static/css/2.d5e8013a.chunk.css",
-    "static/js/2.01fa17f2.chunk.js": "/lunch-ordering-fe/static/js/2.01fa17f2.chunk.js",
-    "static/js/2.01fa17f2.chunk.js.map": "/lunch-ordering-fe/static/js/2.01fa17f2.chunk.js.map",
+    "static/css/2.611f078b.chunk.css": "/lunch-ordering-fe/static/css/2.611f078b.chunk.css",
+    "static/js/2.b3e45021.chunk.js": "/lunch-ordering-fe/static/js/2.b3e45021.chunk.js",
+    "static/js/2.b3e45021.chunk.js.map": "/lunch-ordering-fe/static/js/2.b3e45021.chunk.js.map",
     "index.html": "/lunch-ordering-fe/index.html",
-    "precache-manifest.6f60de4f6d3bc274527507e2602a0a44.js": "/lunch-ordering-fe/precache-manifest.6f60de4f6d3bc274527507e2602a0a44.js",
+    "precache-manifest.85b85df91854c594715add90a052eca0.js": "/lunch-ordering-fe/precache-manifest.85b85df91854c594715add90a052eca0.js",
     "service-worker.js": "/lunch-ordering-fe/service-worker.js",
-    "static/css/2.d5e8013a.chunk.css.map": "/lunch-ordering-fe/static/css/2.d5e8013a.chunk.css.map",
-    "static/css/main.d3ea3807.chunk.css.map": "/lunch-ordering-fe/static/css/main.d3ea3807.chunk.css.map",
-    "static/js/2.01fa17f2.chunk.js.LICENSE.txt": "/lunch-ordering-fe/static/js/2.01fa17f2.chunk.js.LICENSE.txt",
+    "static/css/2.611f078b.chunk.css.map": "/lunch-ordering-fe/static/css/2.611f078b.chunk.css.map",
+    "static/css/main.51ceee83.chunk.css.map": "/lunch-ordering-fe/static/css/main.51ceee83.chunk.css.map",
+    "static/js/2.b3e45021.chunk.js.LICENSE.txt": "/lunch-ordering-fe/static/js/2.b3e45021.chunk.js.LICENSE.txt",
     "static/media/cart.svg": "/lunch-ordering-fe/static/media/cart.890dce60.svg",
     "static/media/checklist.svg": "/lunch-ordering-fe/static/media/checklist.80d775c4.svg",
     "static/media/congrats.svg": "/lunch-ordering-fe/static/media/congrats.211b8e65.svg",
@@ -21,15 +21,14 @@
     "static/media/fobiden-order.svg": "/lunch-ordering-fe/static/media/fobiden-order.6b4b70dc.svg",
     "static/media/loading.svg": "/lunch-ordering-fe/static/media/loading.546dec86.svg",
     "static/media/logo.svg": "/lunch-ordering-fe/static/media/logo.913ae04a.svg",
-    "static/media/App.scss": "/lunch-ordering-fe/static/media/old_paper_bg.566800df.jpg",
-    "static/media/plus.svg": "/lunch-ordering-fe/static/media/plus.311313cd.svg",
-    "static/media/Orders.scss": "/lunch-ordering-fe/static/media/tick.db93b3b8.svg"
+    "static/media/App.scss": "/lunch-ordering-fe/static/media/tick.db93b3b8.svg",
+    "static/media/plus.svg": "/lunch-ordering-fe/static/media/plus.311313cd.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.7725a23b.js",
-    "static/css/2.d5e8013a.chunk.css",
-    "static/js/2.01fa17f2.chunk.js",
-    "static/css/main.d3ea3807.chunk.css",
-    "static/js/main.027a4467.chunk.js"
+    "static/css/2.611f078b.chunk.css",
+    "static/js/2.b3e45021.chunk.js",
+    "static/css/main.51ceee83.chunk.css",
+    "static/js/main.a4520197.chunk.js"
   ]
 }
