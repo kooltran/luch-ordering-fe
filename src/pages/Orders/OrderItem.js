@@ -11,7 +11,7 @@ import { Modal, Button } from 'antd'
 
 import RemoveIcon from '../../assets/cross.svg'
 
-const OrderItem = ({ order, isAdmin, isAllOrders }) => {
+const OrderItem = ({ order, isAdmin, isAllOrders, isDateMode }) => {
   const [isPaid, setPaid] = useState(order.paid)
   const { checkPaidOrder } = useCheckPaidOrder()
   const [
@@ -50,12 +50,13 @@ const OrderItem = ({ order, isAdmin, isAllOrders }) => {
 
   return (
     <div key={order._id} className='order-item'>
-      <span className='name'>{username}</span>
+      <span className='name'>{`${isDateMode ? username : date}`}</span>
       <span className='quantity'>{quantity}</span>
       {<span className='dish-name'>{name}</span>}
       {!isAllOrders && <span className='date'>{convertToLongDate(date)}</span>}
-      <span className='price'>{`${parseInt(price.slice(0, 2)) *
-        quantity},000đ`}</span>
+      <span className='price'>{`${
+        parseInt(price.slice(0, 2)) * quantity
+      },000đ`}</span>
       {isAdmin && (
         <>
           <div className='paid'>

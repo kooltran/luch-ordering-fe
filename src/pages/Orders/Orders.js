@@ -105,7 +105,7 @@ const Orders = () => {
         )}
         {orderList.length !== 0 && (
           <div className='order-content'>
-            <div className='order-item__title'>
+            <div className='order-item__header'>
               <span>Người Order</span>
               <span>Số Lượng</span>
               <span className='dish-name'>Tên Món</span>

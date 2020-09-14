@@ -10,7 +10,10 @@ import {
   DELETE_ORDER_FAIL,
   GET_ALL_ORDERS_REQUEST,
   GET_ALL_ORDERS_SUCCESS,
-  GET_ALL_ORDERS_FAIL
+  GET_ALL_ORDERS_FAIL,
+  GET_ALL_ORDERS_BY_USER_REQUEST,
+  GET_ALL_ORDERS_BY_USER_SUCCESS,
+  GET_ALL_ORDERS_BY_USER_FAIL
 } from './actionTypes'
 
 export const submitOrderRequest = () => ({
@@ -65,5 +68,19 @@ export const deleteOrderSuccess = res => ({
 
 export const deleteOrderFail = err => ({
   type: DELETE_ORDER_FAIL,
+  payload: err
+})
+
+export const getAllOrdersByUserRequest = () => ({
+  type: GET_ALL_ORDERS_BY_USER_REQUEST
+})
+
+export const getAllOrdersByUserSuccess = res => ({
+  type: GET_ALL_ORDERS_BY_USER_SUCCESS,
+  payload: res
+})
+
+export const getAllOrdersByUserFail = err => ({
+  type: GET_ALL_ORDERS_BY_USER_FAIL,
   payload: err
 })

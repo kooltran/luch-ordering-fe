@@ -5,40 +5,52 @@ import {
   getAllOrdersRequest,
   getAllOrdersSuccess,
   getAllOrdersFail,
-  getOrdersRequest,
-  getOrdersSuccess,
-  getOrdersFail
+  getAllOrdersByUserRequest,
+  getAllOrdersByUserSuccess,
+  getAllOrdersByUserFail,
 } from '../../actions/orderAction'
-import { getPayment, getOrders } from '../../api/order'
+import { getPayment, getPaymentByUser } from '../../api/order'
 import AllOrderItem from './AllOrderItem'
 import { Switch } from 'antd'
 
 import './Orders.scss'
 import IconLoading from '../../assets/loading.svg'
-import { groupByNTotal } from '../../helpers'
 
 const Orders = () => {
   const [
     {
-      allOrders: { allOrderList, isLoading }
+      allOrders: { allOrderList, isLoading },
+      allOrdersByUser: { allOrderListUser },
     },
-    dispatch
+    dispatch,
   ] = useAppContext()
   const [isDateMode, setDateMode] = useState(true)
 
   const roles = localStorage.getItem('roles')
   const isAdmin = roles === 'admin'
 
-  const allOrderGrouped = allOrderList.map(order =>
-    order.orders.map(item => item)
-  )
+  const allOrderListFomatted = allOrderList.map(item => {
+    const totalPrice = item.orders.reduce(
+      (acc, order) => acc + 35 * order.quantity,
+      0
+    )
+    return {
+      ...item,
+      totalPrice: totalPrice,
+    }
+  })
 
-  const allOrders = [].concat
-    .apply([], allOrderGrouped)
-    .map(item => ({ ...item, username: item.user.username }))
-
-  const allOrdersByUser = groupByNTotal(allOrders, 'username')
-
+  const allOrderListUserFormatted = allOrderListUser.map(item => {
+    const totalPrice = item.orders.reduce(
+      (acc, order) => acc + 35 * order.quantity,
+      0
+    )
+    return {
+      ...item,
+      totalPrice: totalPrice,
+    }
+  })
+  console.log(isDateMode, 'isDateMode')
   useEffect(() => {
     const getAllOrderList = async () => {
       dispatch(getAllOrdersRequest())
@@ -50,16 +62,16 @@ const Orders = () => {
       }
     }
 
-    const getOrderList = async () => {
-      dispatch(getOrdersRequest())
+    const getAllOrderUserList = async () => {
+      dispatch(getAllOrdersByUserRequest())
       try {
-        const res = await getOrders()
-        dispatch(getOrdersSuccess(res))
+        const res = await getPaymentByUser()
+        dispatch(getAllOrdersByUserSuccess(res))
       } catch (error) {
-        dispatch(getOrdersFail(error))
+        dispatch(getAllOrdersByUserFail(error))
       }
     }
-    getOrderList()
+    getAllOrderUserList()
 
     getAllOrderList()
   }, [dispatch])
@@ -67,59 +79,43 @@ const Orders = () => {
   const handleChangeOrderView = checked => setDateMode(checked)
 
   return (
-    <div className='page'>
-      <div className='order-wrapper'>
+    <div className="page">
+      <div className="order-wrapper">
         <Switch
-          className='btn-switch'
+          className="btn-switch"
           defaultChecked={isDateMode}
           onChange={handleChangeOrderView}
         />
-        <h1 className='order-title'>All Orders List</h1>
+        <h1 className="order-title">All Orders List</h1>
         {isLoading && (
           <img
-            className='icon-loading'
+            className="icon-loading"
             src={IconLoading}
-            alt='loading-spinner'
+            alt="loading-spinner"
           />
         )}
         {isDateMode &&
-          allOrderList.length !== 0 &&
-          allOrderList.map(item => (
+          allOrderListFomatted.length !== 0 &&
+          allOrderListFomatted.map(item => (
             <AllOrderItem
               key={item._id}
               item={item}
               isAdmin={isAdmin}
               isAllOrders={true}
+              isDateMode={isDateMode}
             />
           ))}
-        {!isDateMode && (
-          <div className='order-users'>
-            {Object.keys(allOrdersByUser).map(item => {
-              const orderByName = allOrdersByUser[item]
-              return (
-                <>
-                  <div className='order-user__name'>
-                    <span>{item}</span>
-                  </div>
-                  <div className='order-user__title'>
-                    <span>Ngày Order</span>
-                    <span>Số Lượng</span>
-                    <span>Tên Món</span>
-                    <span>Giá</span>
-                  </div>
-                  {orderByName.map(order => (
-                    <div className='order-user__item' key={order._id}>
-                      <span>{order.date}</span>
-                      <span>{order.quantity}</span>
-                      <span>{order.dish.name}</span>
-                      <span>{order.dish.price}</span>
-                    </div>
-                  ))}
-                </>
-              )
-            })}
-          </div>
-        )}
+        {!isDateMode &&
+          allOrderListUserFormatted.length !== 0 &&
+          allOrderListUserFormatted.map(item => (
+            <AllOrderItem
+              key={item._id}
+              item={item}
+              isAdmin={isAdmin}
+              isAllOrders={true}
+              isDateMode={isDateMode}
+            />
+          ))}
       </div>
     </div>
   )

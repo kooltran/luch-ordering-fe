@@ -47,6 +47,15 @@ export const checkProviderPaid = order => {
     .then(res => res.data)
 }
 
+export const checkPaidAllWeek = order => {
+  const token = localStorage.getItem('token')
+  return axios
+    .post(`${DOMAIN}/orders/paid-allweeks`, order, {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+    .then(res => res.data)
+}
+
 export const deleteOrder = order => {
   const token = localStorage.getItem('token')
   return axios
@@ -69,6 +78,15 @@ export const getPayment = () => {
   const token = localStorage.getItem('token')
   return axios
     .get(`${DOMAIN}/orders/payment`, {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+    .then(res => res.data)
+}
+
+export const getPaymentByUser = () => {
+  const token = localStorage.getItem('token')
+  return axios
+    .get(`${DOMAIN}/orders/payment-by-user`, {
       headers: { Authorization: `Bearer ${token}` }
     })
     .then(res => res.data)

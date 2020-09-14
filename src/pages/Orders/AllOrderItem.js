@@ -5,9 +5,9 @@ import { useAppContext } from '../../AppContext'
 
 import classnames from 'classnames'
 
-const AllOrderItem = ({ item, isAdmin, isAllOrders }) => {
-  const [isPaidProvider, setPaidProvider] = useState(item.isPaid)
-  const { checkProviderPaidOrder } = useCheckPaidOrder()
+const AllOrderItem = ({ item, isAdmin, isAllOrders, isDateMode }) => {
+  const [isPaid, setPaid] = useState(item.isPaid)
+  const { checkProviderPaidOrder, checkPaidOrderAllWeek } = useCheckPaidOrder()
   const [
     {
       checkPaid: { isPaidLoading }
@@ -16,19 +16,25 @@ const AllOrderItem = ({ item, isAdmin, isAllOrders }) => {
 
   const handlePaidProvider = ({ target: { checked } }) => {
     checkProviderPaidOrder({ id: item._id, isPaid: checked })
-    setPaidProvider(checked)
+    setPaid(checked)
+  }
+
+  const handlePaidAllWeek = ({ target: { checked } }) => {
+    console.log(checked)
+    checkPaidOrderAllWeek({ id: item._id, isPaidAllWeek: checked })
+    setPaid(checked)
   }
 
   return (
     <>
       <div className='order-item__date-title' key={item._id}>
-        <span>{item.createdAt}</span>
+        <span>{`${isDateMode ? item.createdAt : item.user}`}</span>
         <div className='paid-provider'>
           <span className='order-checkbox'>
             <input
               type='checkbox'
-              onChange={handlePaidProvider}
-              checked={isPaidProvider}
+              onChange={isDateMode ? handlePaidProvider : handlePaidAllWeek}
+              checked={isPaid}
               disabled={isPaidLoading}
             />
             <span
@@ -39,8 +45,8 @@ const AllOrderItem = ({ item, isAdmin, isAllOrders }) => {
           </span>
         </div>
       </div>
-      <div className='order-item__title'>
-        <span>Người Order</span>
+      <div className='order-item__header'>
+        <span>{`${isDateMode ? 'Người Order' : 'Ngày Order'}`}</span>
         <span>Số Lượng</span>
         <span>Tên Món</span>
         <span>Giá</span>
@@ -57,8 +63,13 @@ const AllOrderItem = ({ item, isAdmin, isAllOrders }) => {
           order={order}
           isAdmin
           isAllOrders={isAllOrders}
+          isDateMode={isDateMode}
         />
       ))}
+      <div className='order-item__total'>
+        <span>Tổng Cộng</span>
+        <span className='price'>{`${item.totalPrice},000đ`}</span>
+      </div>
     </>
   )
 }

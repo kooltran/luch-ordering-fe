@@ -5,9 +5,12 @@ import {
   checkPaidFail,
   checkProviderPaidRequest,
   checkProviderPaidSuccess,
-  checkProviderPaidFail
+  checkProviderPaidFail,
+  checkPaidAllWeekRequest,
+  checkPaidAllWeekSuccess,
+  checkPaidAllWeekFail
 } from '../../actions/checkPaidAction'
-import { checkPaid, checkProviderPaid } from '../../api/order'
+import { checkPaid, checkProviderPaid, checkPaidAllWeek } from '../../api/order'
 import { useCallback } from 'react'
 
 export const useCheckPaidOrder = () => {
@@ -38,5 +41,18 @@ export const useCheckPaidOrder = () => {
     [dispatch]
   )
 
-  return { checkPaidOrder, checkProviderPaidOrder }
+  const checkPaidOrderAllWeek = useCallback(
+    async order => {
+      dispatch(checkPaidAllWeekRequest())
+      try {
+        await checkPaidAllWeek(order)
+        dispatch(checkPaidAllWeekSuccess())
+      } catch (error) {
+        dispatch(checkPaidAllWeekFail(error))
+      }
+    },
+    [dispatch]
+  )
+
+  return { checkPaidOrder, checkProviderPaidOrder, checkPaidOrderAllWeek }
 }
