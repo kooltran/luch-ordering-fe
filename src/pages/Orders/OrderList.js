@@ -7,7 +7,7 @@ import {
   getAllOrdersFail,
   getAllOrdersByUserRequest,
   getAllOrdersByUserSuccess,
-  getAllOrdersByUserFail,
+  getAllOrdersByUserFail
 } from '../../actions/orderAction'
 import { getPayment, getPaymentByUser } from '../../api/order'
 import AllOrderItem from './AllOrderItem'
@@ -16,13 +16,13 @@ import { Switch } from 'antd'
 import './Orders.scss'
 import IconLoading from '../../assets/loading.svg'
 
-const Orders = () => {
+const OrderList = () => {
   const [
     {
-      allOrders: { allOrderList, isLoading },
-      allOrdersByUser: { allOrderListUser },
+      allOrders: { allOrderList, isLoading, isCheckingPaid },
+      allOrdersByUser: { allOrderListUser, isCheckingPaid: isCheckingAllWeek }
     },
-    dispatch,
+    dispatch
   ] = useAppContext()
   const [isDateMode, setDateMode] = useState(true)
 
@@ -36,21 +36,21 @@ const Orders = () => {
     )
     return {
       ...item,
-      totalPrice: totalPrice,
+      totalPrice: totalPrice
     }
   })
 
   const allOrderListUserFormatted = allOrderListUser.map(item => {
-    const totalPrice = item.orders.reduce(
-      (acc, order) => acc + 35 * order.quantity,
-      0
-    )
+    console.log(item, 'item')
+    const totalPrice =
+      item.orders &&
+      item.orders.reduce((acc, order) => acc + 35 * order.quantity, 0)
     return {
       ...item,
-      totalPrice: totalPrice,
+      totalPrice: totalPrice
     }
   })
-  console.log(isDateMode, 'isDateMode')
+
   useEffect(() => {
     const getAllOrderList = async () => {
       dispatch(getAllOrdersRequest())
@@ -79,19 +79,19 @@ const Orders = () => {
   const handleChangeOrderView = checked => setDateMode(checked)
 
   return (
-    <div className="page">
-      <div className="order-wrapper">
+    <div className='page'>
+      <div className='order-wrapper'>
         <Switch
-          className="btn-switch"
+          className='btn-switch'
           defaultChecked={isDateMode}
           onChange={handleChangeOrderView}
         />
-        <h1 className="order-title">All Orders List</h1>
+        <h1 className='order-title'>All Orders List</h1>
         {isLoading && (
           <img
-            className="icon-loading"
+            className='icon-loading'
             src={IconLoading}
-            alt="loading-spinner"
+            alt='loading-spinner'
           />
         )}
         {isDateMode &&
@@ -103,6 +103,7 @@ const Orders = () => {
               isAdmin={isAdmin}
               isAllOrders={true}
               isDateMode={isDateMode}
+              isCheckingPaid={isCheckingPaid}
             />
           ))}
         {!isDateMode &&
@@ -114,6 +115,7 @@ const Orders = () => {
               isAdmin={isAdmin}
               isAllOrders={true}
               isDateMode={isDateMode}
+              isCheckingPaid={isCheckingAllWeek}
             />
           ))}
       </div>
@@ -121,4 +123,4 @@ const Orders = () => {
   )
 }
 
-export default Orders
+export default OrderList

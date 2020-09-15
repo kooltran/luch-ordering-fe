@@ -81,7 +81,7 @@ const Orders = () => {
             alt='loading-spinner'
           />
         )}
-        {orderList.length !== 0 && (
+        {sortedList.length !== 0 && (
           <div className='order-total'>
             <h3 className='title'>Total List</h3>
             <div className='header'>
@@ -103,7 +103,7 @@ const Orders = () => {
             </div>
           </div>
         )}
-        {orderList.length !== 0 && (
+        {sortedList.length !== 0 && (
           <div className='order-content'>
             <div className='order-item__header'>
               <span>Người Order</span>
@@ -113,13 +113,18 @@ const Orders = () => {
               <span>Giá</span>
               {isAdmin && (
                 <>
-                  <span className='paid'>Paid</span>
                   <span className='delete'></span>
                 </>
               )}
             </div>
-            {orderList.map(order => (
-              <OrderItem key={order._id} order={order} isAdmin={isAdmin} />
+            {sortedList.map(order => (
+              <OrderItem
+                key={order._id}
+                order={order}
+                isAdmin={isAdmin}
+                isAllOrders={false}
+                isDateMode={true}
+              />
             ))}
           </div>
         )}

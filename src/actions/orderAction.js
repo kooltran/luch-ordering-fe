@@ -63,7 +63,7 @@ export const deleteOrderRequest = () => ({
 
 export const deleteOrderSuccess = res => ({
   type: DELETE_ORDER_SUCCESS,
-  payload: res.data
+  payload: res
 })
 
 export const deleteOrderFail = err => ({

@@ -1,13 +1,6 @@
 import React, { useContext, useCallback, useReducer } from 'react'
 import { rootReducer, initialStateCombined } from './reducers/rootReducer'
 
-export const initialState = {
-  menu: {
-    isLoading: false,
-    menuList: []
-  }
-}
-
 export const AppContext = React.createContext({})
 
 export const AppContextProvider = props => {

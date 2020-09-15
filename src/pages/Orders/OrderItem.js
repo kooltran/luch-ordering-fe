@@ -13,12 +13,13 @@ import RemoveIcon from '../../assets/cross.svg'
 
 const OrderItem = ({ order, isAdmin, isAllOrders, isDateMode }) => {
   const [isPaid, setPaid] = useState(order.paid)
-  const { checkPaidOrder } = useCheckPaidOrder()
+  const { checkPaidOrderItem } = useCheckPaidOrder()
   const [
     {
-      checkPaid: { isPaidLoading }
+      allOrders: { isCheckingPaid }
     }
   ] = useAppContext()
+
   const {
     quantity,
     dish: { name, price },
@@ -32,11 +33,15 @@ const OrderItem = ({ order, isAdmin, isAllOrders, isDateMode }) => {
     }
   ] = useAppContext()
   const [isOpenModal, setOpenModal] = useState(false)
-
   const removeOrder = useDeleteOrder()
 
   const handChangePaid = ({ target: { checked } }) => {
-    checkPaidOrder({ id: order._id, isPaid: checked })
+    const paramCheckPaid = {
+      id: order._id,
+      isPaid: checked,
+      isDateMode: isDateMode
+    }
+    checkPaidOrderItem(paramCheckPaid)
     setPaid(checked)
   }
 
@@ -59,24 +64,28 @@ const OrderItem = ({ order, isAdmin, isAllOrders, isDateMode }) => {
       },000đ`}</span>
       {isAdmin && (
         <>
-          <div className='paid'>
-            <span className='order-checkbox'>
-              <input
-                type='checkbox'
-                onChange={handChangePaid}
-                checked={isPaid}
-                disabled={isPaidLoading}
-              />
-              <span
-                className={classnames('check-mask', {
-                  'is-disabled': isPaidLoading
-                })}
-              ></span>
+          {isAllOrders && (
+            <div className='paid'>
+              <span className='order-checkbox'>
+                <input
+                  type='checkbox'
+                  onChange={handChangePaid}
+                  checked={isPaid}
+                  disabled={isCheckingPaid}
+                />
+                <span
+                  className={classnames('check-mask', {
+                    'is-disabled': isCheckingPaid
+                  })}
+                ></span>
+              </span>
+            </div>
+          )}
+          {!isAllOrders && (
+            <span className='delete' onClick={handleOpenConfirmModal}>
+              <img src={RemoveIcon} alt='delete-order' />
             </span>
-          </div>
-          <span className='delete' onClick={handleOpenConfirmModal}>
-            <img src={RemoveIcon} alt='delete-order' />
-          </span>
+          )}
         </>
       )}
 

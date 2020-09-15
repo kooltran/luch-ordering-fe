@@ -1,28 +1,29 @@
 import { useAppContext } from '../../AppContext'
 import {
-  checkPaidRequest,
-  checkPaidSuccess,
-  checkPaidFail,
   checkProviderPaidRequest,
   checkProviderPaidSuccess,
   checkProviderPaidFail,
   checkPaidAllWeekRequest,
   checkPaidAllWeekSuccess,
-  checkPaidAllWeekFail
+  checkPaidAllWeekFail,
+  checkPaidOrderItemRequest,
+  checkPaidOrderItemSuccess,
+  checkPaidOrderItemFail
 } from '../../actions/checkPaidAction'
 import { checkPaid, checkProviderPaid, checkPaidAllWeek } from '../../api/order'
 import { useCallback } from 'react'
 
 export const useCheckPaidOrder = () => {
   const [, dispatch] = useAppContext()
-  const checkPaidOrder = useCallback(
+
+  const checkPaidOrderItem = useCallback(
     async order => {
-      dispatch(checkPaidRequest())
+      dispatch(checkPaidOrderItemRequest())
       try {
-        await checkPaid(order)
-        dispatch(checkPaidSuccess())
+        const res = await checkPaid(order)
+        dispatch(checkPaidOrderItemSuccess(res))
       } catch (error) {
-        dispatch(checkPaidFail(error))
+        dispatch(checkPaidOrderItemFail(error))
       }
     },
     [dispatch]
@@ -32,8 +33,8 @@ export const useCheckPaidOrder = () => {
     async order => {
       dispatch(checkProviderPaidRequest())
       try {
-        await checkProviderPaid(order)
-        dispatch(checkProviderPaidSuccess())
+        const res = await checkProviderPaid(order)
+        dispatch(checkProviderPaidSuccess(res))
       } catch (error) {
         dispatch(checkProviderPaidFail(error))
       }
@@ -45,8 +46,8 @@ export const useCheckPaidOrder = () => {
     async order => {
       dispatch(checkPaidAllWeekRequest())
       try {
-        await checkPaidAllWeek(order)
-        dispatch(checkPaidAllWeekSuccess())
+        const res = await checkPaidAllWeek(order)
+        dispatch(checkPaidAllWeekSuccess(res))
       } catch (error) {
         dispatch(checkPaidAllWeekFail(error))
       }
@@ -54,5 +55,9 @@ export const useCheckPaidOrder = () => {
     [dispatch]
   )
 
-  return { checkPaidOrder, checkProviderPaidOrder, checkPaidOrderAllWeek }
+  return {
+    checkPaidOrderItem,
+    checkProviderPaidOrder,
+    checkPaidOrderAllWeek
+  }
 }

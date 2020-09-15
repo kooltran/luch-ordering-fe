@@ -11,7 +11,7 @@ import { useCallback } from 'react'
 export const useDeleteOrder = () => {
   const [
     {
-      allOrders: { orderList }
+      allOrders: { allOrderList }
     },
     dispatch
   ] = useAppContext()
@@ -22,15 +22,20 @@ export const useDeleteOrder = () => {
       try {
         const res = await deleteOrder(order)
         dispatch(deleteOrderSuccess(res))
-        // const remainingOrders = orderList.filter(
-        //   order => order._id !== res.data._id
-        // )
+        // const remainingOrders = allOrderList.map(item => {
+        //   const orders = item.orders.filter(order => order._id !== res._id)
+        //   return {
+        //     ...item,
+        //     orders
+        //   }
+        // })
+        // console.log(remainingOrders, 'remainingOrders')
         // dispatch(getAllOrdersSuccess(remainingOrders))
       } catch (error) {
         dispatch(deleteOrderFail(error))
       }
     },
-    [dispatch, orderList]
+    [dispatch]
   )
 
   return removeOrder
