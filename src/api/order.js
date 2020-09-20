@@ -1,93 +1,55 @@
-import axios from 'axios'
-import { DOMAIN } from '../constants'
+import axiosInstance from './axiosInstance'
 
 export const createOrder = orders => {
-  const token = localStorage.getItem('token')
-
-  return axios
-    .post(`${DOMAIN}/orders/create`, orders, {
-      headers: { Authorization: `Bearer ${token}` }
-    })
-    .then(res => res.data)
+  return axiosInstance.post(`/orders/create`, orders).then(res => res.data)
 }
 
 export const getOrders = () => {
-  const token = localStorage.getItem('token')
-  return axios
-    .get(`${DOMAIN}/orders/list`, {
-      headers: { Authorization: `Bearer ${token}` }
-    })
-    .then(res => res.data)
+  return axiosInstance.get(`/orders/list`).then(res => res.data)
 }
 
 export const getAllOrders = () => {
-  const token = localStorage.getItem('token')
-  return axios
-    .get(`${DOMAIN}/orders/all`, {
-      headers: { Authorization: `Bearer ${token}` }
-    })
-    .then(res => res.data)
+  return axiosInstance.get(`/orders/all`).then(res => res.data)
 }
 
 export const checkPaid = params => {
-  const token = localStorage.getItem('token')
-  return axios
-    .post(`${DOMAIN}/orders/check-paid`, params, {
-      headers: { Authorization: `Bearer ${token}` }
-    })
-    .then(res => res.data)
+  return axiosInstance.post(`/orders/check-paid`, params).then(res => res.data)
 }
 
 export const checkProviderPaid = order => {
-  const token = localStorage.getItem('token')
-  return axios
-    .post(`${DOMAIN}/orders/check-paid-provider`, order, {
-      headers: { Authorization: `Bearer ${token}` }
-    })
+  return axiosInstance
+    .post(`/orders/check-paid-provider`, order)
     .then(res => res.data)
 }
 
 export const checkPaidAllWeek = order => {
-  const token = localStorage.getItem('token')
-  return axios
-    .post(`${DOMAIN}/orders/paid-allweeks`, order, {
-      headers: { Authorization: `Bearer ${token}` }
-    })
+  return axiosInstance
+    .post(`/orders/paid-allweeks`, order)
     .then(res => res.data)
 }
 
 export const deleteOrder = order => {
-  const token = localStorage.getItem('token')
-  return axios
-    .post(`${DOMAIN}/orders/delete`, order, {
-      headers: { Authorization: `Bearer ${token}` }
-    })
-    .then(res => res.data)
+  return axiosInstance.post(`/orders/delete`, order).then(res => res.data)
 }
 
 export const getAllOrderDishes = () => {
-  const token = localStorage.getItem('token')
-  return axios
-    .get(`${DOMAIN}/orders/get-all-orders`, {
-      headers: { Authorization: `Bearer ${token}` }
-    })
-    .then(res => res.data)
+  return axiosInstance.get(`/orders/get-all-orders`).then(res => res.data)
 }
 
-export const getPayment = () => {
-  const token = localStorage.getItem('token')
-  return axios
-    .get(`${DOMAIN}/orders/payment`, {
-      headers: { Authorization: `Bearer ${token}` }
-    })
-    .then(res => res.data)
+export const getPaymentByDate = () => {
+  return axiosInstance.get('/orders/payment-by-date').then(res => res.data)
 }
 
 export const getPaymentByUser = () => {
-  const token = localStorage.getItem('token')
-  return axios
-    .get(`${DOMAIN}/orders/payment-by-user`, {
-      headers: { Authorization: `Bearer ${token}` }
+  return axiosInstance.get('/orders/payment-by-user').then(res => res.data)
+}
+
+export const getPayment = type => {
+  return axiosInstance
+    .get('/orders/payment', {
+      params: {
+        type
+      }
     })
     .then(res => res.data)
 }

@@ -4,14 +4,11 @@ import { useAppContext } from '../../AppContext'
 import {
   getAllOrdersRequest,
   getAllOrdersSuccess,
-  getAllOrdersFail,
-  getAllOrdersByUserRequest,
-  getAllOrdersByUserSuccess,
-  getAllOrdersByUserFail,
+  getAllOrdersFail
 } from '../../actions/orderAction'
-import { getPayment, getPaymentByUser } from '../../api/order'
+import SelectType from '../../components/SelectType/SelectType'
+import { getPayment } from '../../api/order'
 import AllOrderItem from './AllOrderItem'
-import { Switch } from 'antd'
 
 import './Orders.scss'
 import IconLoading from '../../assets/loading.svg'
@@ -19,104 +16,80 @@ import IconLoading from '../../assets/loading.svg'
 const OrderList = () => {
   const [
     {
-      allOrders: { allOrderList, isLoading, isCheckingPaid },
-      allOrdersByUser: { allOrderListUser, isCheckingPaid: isCheckingAllWeek },
+      allOrders: { allOrderList, isLoading, isCheckingPaid }
     },
-    dispatch,
+    dispatch
   ] = useAppContext()
-  const [isDateMode, setDateMode] = useState(true)
+  const [type, setType] = useState('date')
 
   const roles = localStorage.getItem('roles')
   const isAdmin = roles === 'admin'
 
-  const allOrderListFomatted = allOrderList.map(item => {
-    const totalPrice = item.orders.reduce(
-      (acc, order) => acc + 35 * order.quantity,
-      0
-    )
-    return {
-      ...item,
-      totalPrice: totalPrice,
-    }
-  })
+  const allOrderListFomatted = allOrderList
+    .map(item => {
+      const totalPrice = item.orders.reduce(
+        (acc, order) => acc + 35 * order.quantity,
+        0
+      )
 
-  const allOrderListUserFormatted = allOrderListUser.map(item => {
-    const totalPrice =
-      item.orders &&
-      item.orders.reduce((acc, order) => acc + 35 * order.quantity, 0)
-    return {
-      ...item,
-      totalPrice: totalPrice,
+      const totalQty = item.orders.reduce(
+        (acc, order) => acc + order.quantity,
+        0
+      )
+
+      return {
+        ...item,
+        totalPrice,
+        totalQty
+      }
+    })
+    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+
+  const getAllOrdersList = async type => {
+    dispatch(getAllOrdersRequest())
+
+    try {
+      const data = await getPayment(type)
+      const res = data.filter(item => item.orders.length > 0)
+      dispatch(getAllOrdersSuccess(res))
+    } catch (error) {
+      dispatch(getAllOrdersFail(error))
     }
-  })
+  }
 
   useEffect(() => {
-    const getAllOrderList = async () => {
-      dispatch(getAllOrdersRequest())
-      try {
-        const data = await getPayment()
-        const res = data.filter(item => item.orders.length > 0)
-        dispatch(getAllOrdersSuccess(res))
-      } catch (error) {
-        dispatch(getAllOrdersFail(error))
-      }
-    }
-
-    const getAllOrderUserList = async () => {
-      dispatch(getAllOrdersByUserRequest())
-      try {
-        const data = await getPaymentByUser()
-        const res = data.filter(item => item.orders.length > 0)
-        dispatch(getAllOrdersByUserSuccess(res))
-      } catch (error) {
-        dispatch(getAllOrdersByUserFail(error))
-      }
-    }
-    getAllOrderUserList()
-
-    getAllOrderList()
+    getAllOrdersList('date')
   }, [dispatch])
 
-  const handleChangeOrderView = checked => setDateMode(checked)
+  const handleChangeType = value => {
+    setType(value)
+    getAllOrdersList(value)
+  }
 
   return (
-    <div className="page">
-      <div className="order-wrapper">
-        <Switch
-          className="btn-switch"
-          defaultChecked={isDateMode}
-          onChange={handleChangeOrderView}
+    <div className='page'>
+      <div className='order-wrapper'>
+        <SelectType
+          handleChangeType={handleChangeType}
+          className='order-filter'
         />
-        <h1 className="order-title">All Orders List</h1>
+        <h1 className='order-title'>All Orders List</h1>
         {isLoading && (
           <img
-            className="icon-loading"
+            className='icon-loading'
             src={IconLoading}
-            alt="loading-spinner"
+            alt='loading-spinner'
           />
         )}
-        {isDateMode &&
-          allOrderListFomatted.length !== 0 &&
+        {allOrderListFomatted.length !== 0 &&
           allOrderListFomatted.map(item => (
             <AllOrderItem
               key={item._id}
               item={item}
               isAdmin={isAdmin}
               isAllOrders={true}
-              isDateMode={isDateMode}
               isCheckingPaid={isCheckingPaid}
-            />
-          ))}
-        {!isDateMode &&
-          allOrderListUserFormatted.length !== 0 &&
-          allOrderListUserFormatted.map(item => (
-            <AllOrderItem
-              key={item._id}
-              item={item}
-              isAdmin={isAdmin}
-              isAllOrders={true}
-              isDateMode={isDateMode}
-              isCheckingPaid={isCheckingAllWeek}
+              type={type}
             />
           ))}
       </div>

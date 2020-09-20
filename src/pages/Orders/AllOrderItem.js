@@ -4,13 +4,7 @@ import classnames from 'classnames'
 import OrderItem from './OrderItem'
 import { useCheckPaidOrder } from './useCheckPaidOrder'
 
-const AllOrderItem = ({
-  item,
-  isAdmin,
-  isAllOrders,
-  isDateMode,
-  isCheckingPaid,
-}) => {
+const AllOrderItem = ({ item, isAdmin, isAllOrders, type, isCheckingPaid }) => {
   const userInfo = item.orders[0].user
   const userInfoMap = { [userInfo._id]: userInfo.username }
 
@@ -21,43 +15,43 @@ const AllOrderItem = ({
   }
 
   const handlePaidAllWeek = ({ target: { checked } }) => {
-    console.log(item.user, 'userId')
     checkPaidOrderAllWeek({
       id: item._id,
       isPaidAllWeek: checked,
-      userId: item.user,
+      userId: item.user
     })
   }
+  const isDateMode = type === 'date'
 
   return (
     <>
-      <div className="order-item__date-title" key={item._id}>
+      <div className='order-item__date-title' key={item._id}>
         <span>{`${isDateMode ? item.createdAt : userInfoMap[item.user]}`}</span>
-        <div className="paid-provider">
-          <span className="order-checkbox">
+        <div className='paid-provider'>
+          <span className='order-checkbox'>
             <input
-              type="checkbox"
+              type='checkbox'
               onChange={isDateMode ? handlePaidProvider : handlePaidAllWeek}
               checked={item.isPaid}
               disabled={isCheckingPaid}
             />
             <span
               className={classnames('check-mask', {
-                'is-disabled': isCheckingPaid,
+                'is-disabled': isCheckingPaid
               })}
             ></span>
           </span>
         </div>
       </div>
-      <div className="order-item__header">
+      <div className='order-item__header'>
         <span>{`${isDateMode ? 'Người Order' : 'Ngày Order'}`}</span>
         <span>Số Lượng</span>
         <span>Tên Món</span>
         <span>Giá</span>
         {isAdmin && (
           <>
-            <span className="paid">Paid</span>
-            {!isAllOrders && <span className="delete"></span>}
+            <span className='paid'>Paid</span>
+            {!isAllOrders && <span className='delete'></span>}
           </>
         )}
       </div>
@@ -67,12 +61,16 @@ const AllOrderItem = ({
           order={order}
           isAdmin
           isAllOrders={isAllOrders}
-          isDateMode={isDateMode}
+          type={type}
+          paymentId={item._id}
         />
       ))}
-      <div className="order-item__total">
-        <span>Tổng Cộng</span>
-        <span className="price">{`${item.totalPrice},000đ`}</span>
+      <div className='order-item__total'>
+        <span>TỔNG CỘNG</span>
+        <span>{item.totalQty}</span>
+        <span></span>
+        <span className='price'>{`${item.totalPrice},000đ`}</span>
+        <span></span>
       </div>
     </>
   )

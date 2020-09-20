@@ -7,7 +7,10 @@ import {
   CHECK_PROVIDER_PAID_FAIL,
   CHECK_PAID_ORDER_ITEM_REQUEST,
   CHECK_PAID_ORDER_ITEM_SUCCESS,
-  CHECK_PAID_ORDER_ITEM_FAIL
+  CHECK_PAID_ORDER_ITEM_FAIL,
+  CHECK_PAID_ALL_WEEK_REQUEST,
+  CHECK_PAID_ALL_WEEK_SUCCESS,
+  CHECK_PAID_ALL_WEEK_FAIL
 } from '../actions/actionTypes'
 import { groupByNTotal } from '../helpers'
 
@@ -66,6 +69,32 @@ export const getAllOrdersReducer = (state, action) => {
         allOrderList: [],
         checkPaidFail: action.payload
       }
+    case CHECK_PAID_ALL_WEEK_REQUEST:
+      return {
+        ...state,
+        isCheckingPaid: true,
+        checkPaidFail: null,
+        isLoading: false,
+        getOrdersFail: null
+      }
+    case CHECK_PAID_ALL_WEEK_SUCCESS:
+      return {
+        ...state,
+        isCheckingPaid: false,
+        allOrderList: action.payload,
+        checkPaidFail: null,
+        isLoading: false,
+        getOrdersFail: null
+      }
+    case CHECK_PAID_ALL_WEEK_FAIL:
+      return {
+        ...state,
+        isCheckingPaid: false,
+        allOrderList: [],
+        checkPaidFail: action.payload.message,
+        isLoading: false,
+        getOrdersFail: null
+      }
     case CHECK_PAID_ORDER_ITEM_REQUEST:
       return {
         ...state,
@@ -73,17 +102,24 @@ export const getAllOrdersReducer = (state, action) => {
       }
     case CHECK_PAID_ORDER_ITEM_SUCCESS:
       const { allOrderList } = state
-      const orderList = action.payload
-      const orderListByDate = groupByNTotal(orderList, 'date')
-      const res = allOrderList.map(order => ({
-        ...order,
-        orders: orderListByDate[order.createdAt]
-      }))
+      const res = action.payload
+
+      const allOrderListPaid = allOrderList.map(item => {
+        if (item._id === res._id) {
+          return {
+            ...item,
+            orders: res.orders,
+            isPaid: res.isPaid
+          }
+        } else {
+          return item
+        }
+      })
 
       return {
         ...state,
         isCheckingPaid: false,
-        allOrderList: res
+        allOrderList: allOrderListPaid
       }
     case CHECK_PAID_ORDER_ITEM_FAIL:
       return {
