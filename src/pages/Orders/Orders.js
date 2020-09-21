@@ -4,7 +4,7 @@ import { useAppContext } from '../../AppContext'
 import {
   getOrdersRequest,
   getOrdersSuccess,
-  getOrdersFail
+  getOrdersFail,
 } from '../../actions/orderAction'
 import OrderItem from './OrderItem'
 import { getOrders } from '../../api/order'
@@ -17,9 +17,9 @@ import IconLoading from '../../assets/loading.svg'
 const Orders = () => {
   const [
     {
-      orders: { orderList, isOrdersLoading }
+      orders: { orderList, isOrdersLoading },
     },
-    dispatch
+    dispatch,
   ] = useAppContext()
 
   const roles = localStorage.getItem('roles')
@@ -43,7 +43,7 @@ const Orders = () => {
   const formattedOrderList = orderList.map(order => ({
     quantity: order.quantity,
     dishName: order.dish.name,
-    price: 35
+    price: 35,
   }))
 
   const orderListGroupByDishname = groupByNTotal(formattedOrderList, 'dishName')
@@ -57,7 +57,7 @@ const Orders = () => {
     price: orderListGroupByDishname[item].reduce(
       (acc, ele) => acc + ele.price * ele.quantity,
       0
-    )
+    ),
   }))
 
   const totalQtyDishes = orderListTotalQty.reduce(
@@ -71,32 +71,32 @@ const Orders = () => {
   )
 
   return (
-    <div className='page'>
-      <div className='order-wrapper'>
-        <h1 className='order-title'>Orders List</h1>
+    <div className="page">
+      <div className="order-wrapper">
+        <h1 className="order-title">Orders List</h1>
         {isOrdersLoading && (
           <img
-            className='icon-loading'
+            className="icon-loading"
             src={IconLoading}
-            alt='loading-spinner'
+            alt="loading-spinner"
           />
         )}
         {sortedList.length !== 0 && (
-          <div className='order-total'>
-            <h3 className='title'>Total List</h3>
-            <div className='header'>
+          <div className="order-total">
+            <h3 className="title">Total List</h3>
+            <div className="header">
               <span>Tên món</span>
               <span>Số Lượng</span>
               <span>Giá</span>
             </div>
             {orderListTotalQty.map(order => (
-              <div key={order.name} className='item'>
+              <div key={order.name} className="item">
                 <span>{order.name}</span>
                 <span>{order.qty}</span>
                 <span>{`${order.price}.000đ`}</span>
               </div>
             ))}
-            <div className='total'>
+            <div className="total">
               <span>Tổng cộng</span>
               <span>{totalQtyDishes}</span>
               <span>{`${totalPriceDishes}.000đ`}</span>
@@ -104,16 +104,16 @@ const Orders = () => {
           </div>
         )}
         {sortedList.length !== 0 && (
-          <div className='order-content'>
-            <div className='order-item__header'>
+          <div className="order-content">
+            <div className="order-item__header">
               <span>Người Order</span>
               <span>Số Lượng</span>
-              <span className='dish-name'>Tên Món</span>
+              <span className="dish-name">Tên Món</span>
               <span>Ngày Order</span>
               <span>Giá</span>
               {isAdmin && (
                 <>
-                  <span className='delete'></span>
+                  <span className="delete"></span>
                 </>
               )}
             </div>
@@ -123,7 +123,7 @@ const Orders = () => {
                 order={order}
                 isAdmin={isAdmin}
                 isAllOrders={false}
-                isDateMode={true}
+                type="date"
               />
             ))}
           </div>
