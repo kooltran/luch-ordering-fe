@@ -10,7 +10,10 @@ import {
   DELETE_ORDER_FAIL,
   GET_ALL_ORDERS_REQUEST,
   GET_ALL_ORDERS_SUCCESS,
-  GET_ALL_ORDERS_FAIL
+  GET_ALL_ORDERS_FAIL,
+  GET_ORDERS_HISTORY_REQUEST,
+  GET_ORDERS_HISTORY_SUCCESS,
+  GET_ORDERS_HISTORY_FAIL
 } from './actionTypes'
 
 export const submitOrderRequest = () => ({
@@ -65,5 +68,19 @@ export const deleteOrderSuccess = res => ({
 
 export const deleteOrderFail = err => ({
   type: DELETE_ORDER_FAIL,
+  payload: err
+})
+
+export const getOrdersHistoryRequest = () => ({
+  type: GET_ORDERS_HISTORY_REQUEST
+})
+
+export const getOrdersHistorySuccess = res => ({
+  type: GET_ORDERS_HISTORY_SUCCESS,
+  payload: res
+})
+
+export const getOrdersHistoryFail = err => ({
+  type: GET_ORDERS_HISTORY_FAIL,
   payload: err
 })

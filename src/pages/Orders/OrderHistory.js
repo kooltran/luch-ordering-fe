@@ -2,18 +2,18 @@ import React, { useEffect, useState } from 'react'
 import { useAppContext } from '../../AppContext'
 
 import {
-  getAllOrdersRequest,
-  getAllOrdersSuccess,
-  getAllOrdersFail
+  getOrdersHistoryRequest,
+  getOrdersHistorySuccess,
+  getOrdersHistoryFail
 } from '../../actions/orderAction'
 import SelectType from '../../components/SelectType/SelectType'
-import { getPaymentByWeek } from '../../api/order'
+import { getPaymentHistory } from '../../api/order'
 import AllOrderItem from './AllOrderItem'
 
 import './Orders.scss'
 import IconLoading from '../../assets/loading.svg'
 
-const OrderList = () => {
+const OrderListHistory = () => {
   const [
     {
       allOrders: { allOrderList, isLoading, isCheckingPaid }
@@ -45,25 +45,25 @@ const OrderList = () => {
     })
     .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
 
-  const getAllOrdersList = async type => {
-    dispatch(getAllOrdersRequest())
+  const getOrdersHistoryList = async type => {
+    dispatch(getOrdersHistoryRequest())
 
     try {
-      const data = await getPaymentByWeek(type)
+      const data = await getPaymentHistory(type)
       const res = data.filter(item => item.orders.length > 0)
-      dispatch(getAllOrdersSuccess(res))
+      dispatch(getOrdersHistorySuccess(res))
     } catch (error) {
-      dispatch(getAllOrdersFail(error))
+      dispatch(getOrdersHistoryFail(error))
     }
   }
 
   useEffect(() => {
-    getAllOrdersList('date')
+    getOrdersHistoryList('date')
   }, [dispatch])
 
   const handleChangeType = value => {
     setType(value)
-    getAllOrdersList(value)
+    getOrdersHistoryList(value)
   }
 
   return (
@@ -73,7 +73,7 @@ const OrderList = () => {
           handleChangeType={handleChangeType}
           className='order-filter'
         />
-        <h1 className='order-title'>All Orders List</h1>
+        <h1 className='order-title'>Orders History</h1>
         {isLoading && (
           <img
             className='icon-loading'
@@ -97,4 +97,4 @@ const OrderList = () => {
   )
 }
 
-export default OrderList
+export default OrderListHistory

@@ -3,6 +3,7 @@ import classnames from 'classnames'
 
 import OrderItem from './OrderItem'
 import { useCheckPaidOrder } from './useCheckPaidOrder'
+import moment from 'moment'
 
 const AllOrderItem = ({ item, isAdmin, isAllOrders, type, isCheckingPaid }) => {
   const userInfo = item.orders[0].user
@@ -26,7 +27,11 @@ const AllOrderItem = ({ item, isAdmin, isAllOrders, type, isCheckingPaid }) => {
   return (
     <>
       <div className='order-item__date-title' key={item._id}>
-        <span>{`${isDateMode ? item.createdAt : userInfoMap[item.user]}`}</span>
+        <span>{`${
+          isDateMode
+            ? moment(item.createdAt).format('ddd DD MMM YYYY')
+            : userInfoMap[item.user]
+        }`}</span>
         <div className='paid-provider'>
           <span className='order-checkbox'>
             <input

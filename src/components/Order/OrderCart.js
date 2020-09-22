@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import classnames from 'classnames'
+import moment from 'moment'
 import { useAppContext } from '../../AppContext'
 import CartItem from './CartItem'
 import { useSubmitOrder } from './useSubmitOrder'
@@ -30,6 +31,7 @@ const OrderCart = () => {
       dishId: order.id,
       quantity: order.quantity,
       date: new Date().toDateString(),
+      createdAt: moment().startOf('day'),
       paid: false
     }))
     submitOrders(orderListParams)

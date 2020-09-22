@@ -10,9 +10,11 @@ import {
   CHECK_PAID_ORDER_ITEM_FAIL,
   CHECK_PAID_ALL_WEEK_REQUEST,
   CHECK_PAID_ALL_WEEK_SUCCESS,
-  CHECK_PAID_ALL_WEEK_FAIL
+  CHECK_PAID_ALL_WEEK_FAIL,
+  GET_ORDERS_HISTORY_REQUEST,
+  GET_ORDERS_HISTORY_SUCCESS,
+  GET_ORDERS_HISTORY_FAIL
 } from '../actions/actionTypes'
-import { groupByNTotal } from '../helpers'
 
 export const getAllOrdersReducer = (state, action) => {
   switch (action.type) {
@@ -35,6 +37,33 @@ export const getAllOrdersReducer = (state, action) => {
         checkPaidFail: null
       }
     case GET_ALL_ORDERS_FAIL:
+      return {
+        ...state,
+        isLoading: false,
+        allOrderList: [],
+        getOrdersFail: action.payload.message,
+        isCheckingPaid: false,
+        checkPaidFail: null
+      }
+    case GET_ORDERS_HISTORY_REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+        allOrderList: [],
+        getOrdersFail: null,
+        isCheckingPaid: false,
+        checkPaidFail: null
+      }
+    case GET_ORDERS_HISTORY_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        allOrderList: action.payload,
+        getOrdersFail: null,
+        isCheckingPaid: false,
+        checkPaidFail: null
+      }
+    case GET_ORDERS_HISTORY_FAIL:
       return {
         ...state,
         isLoading: false,

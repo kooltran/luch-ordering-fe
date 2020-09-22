@@ -44,9 +44,19 @@ export const getPaymentByUser = () => {
   return axiosInstance.get('/orders/payment-by-user').then(res => res.data)
 }
 
-export const getPayment = type => {
+export const getPaymentByWeek = type => {
   return axiosInstance
-    .get('/orders/payment', {
+    .get('/orders/payment-by-week', {
+      params: {
+        type
+      }
+    })
+    .then(res => res.data)
+}
+
+export const getPaymentHistory = type => {
+  return axiosInstance
+    .get('/orders/payments', {
       params: {
         type
       }
