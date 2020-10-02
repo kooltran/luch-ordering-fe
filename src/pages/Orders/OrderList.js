@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
+import * as dayjs from 'dayjs'
+
 import { useAppContext } from '../../AppContext'
 
 import {
   getAllOrdersRequest,
   getAllOrdersSuccess,
-  getAllOrdersFail
+  getAllOrdersFail,
 } from '../../actions/orderAction'
 import SelectType from '../../components/SelectType/SelectType'
 import { getPaymentByWeek } from '../../api/order'
@@ -13,83 +15,116 @@ import AllOrderItem from './AllOrderItem'
 import './Orders.scss'
 import IconLoading from '../../assets/loading.svg'
 
+const weekOfYear = require('dayjs/plugin/weekOfYear')
+dayjs.extend(weekOfYear)
+
+const currentWeek = dayjs().week()
+
+const viewTypeOptions = [
+  { label: 'Date', value: 'date' },
+  { label: 'User', value: 'user' },
+]
+
+const weekOptions = [
+  { label: 'Current Week', value: currentWeek },
+  { label: 'Last Week', value: currentWeek - 1 },
+  { label: 'Last 2 Week', value: currentWeek - 2 },
+]
+
 const OrderList = () => {
   const [
     {
-      allOrders: { allOrderList, isLoading, isCheckingPaid }
+      allOrders: { allOrderList, isLoading, isCheckingPaid },
     },
-    dispatch
+    dispatch,
   ] = useAppContext()
   const [type, setType] = useState('date')
+  const [week, setWeek] = useState(currentWeek)
 
   const roles = localStorage.getItem('roles')
   const isAdmin = roles === 'admin'
 
-  const allOrderListFomatted = allOrderList
-    .map(item => {
-      const totalPrice = item.orders.reduce(
-        (acc, order) => acc + 35 * order.quantity,
-        0
-      )
+  const allOrderListFomatted = Object.keys(allOrderList).map(key => {
+    const orders = allOrderList[key]
+    const totalPrice = orders.reduce(
+      (acc, order) => acc + 35 * order.quantity,
+      0
+    )
 
-      const totalQty = item.orders.reduce(
-        (acc, order) => acc + order.quantity,
-        0
-      )
+    const totalQty = orders.reduce((acc, order) => acc + order.quantity, 0)
 
-      return {
-        ...item,
-        totalPrice,
-        totalQty
-      }
-    })
-    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+    return {
+      [type]: key,
+      orders,
+      totalPrice,
+      totalQty,
+    }
+  })
 
-  const getAllOrdersList = async type => {
+  const priceAllWeek = allOrderListFomatted.reduce(
+    (acc, item) => acc + item.totalPrice,
+    0
+  )
+
+  const getAllOrdersList = async (type, week) => {
     dispatch(getAllOrdersRequest())
-
     try {
-      const data = await getPaymentByWeek(type)
-      const res = data.filter(item => item.orders.length > 0)
-      dispatch(getAllOrdersSuccess(res))
+      const data = await getPaymentByWeek(week)
+      dispatch(getAllOrdersSuccess({ data: data, type: type }))
     } catch (error) {
       dispatch(getAllOrdersFail(error))
     }
   }
 
   useEffect(() => {
-    getAllOrdersList('date')
+    getAllOrdersList('date', currentWeek)
   }, [dispatch])
 
   const handleChangeType = value => {
     setType(value)
-    getAllOrdersList(value)
+    getAllOrdersList(value, week)
+  }
+
+  const handleChangeWeek = week => {
+    setWeek(week)
+    getAllOrdersList(type, week)
   }
 
   return (
-    <div className='page'>
-      <div className='order-wrapper'>
-        <SelectType
-          handleChangeType={handleChangeType}
-          className='order-filter'
-        />
-        <h1 className='order-title'>All Orders List</h1>
+    <div className="page">
+      <div className="order-wrapper">
+        <div className="order-totalweek">
+          <span>Tổng tiền</span>
+          <div className="price">
+            {`${priceAllWeek},000`}
+            <sup>đ</sup>
+          </div>
+        </div>
+        <div className="order-filter">
+          <SelectType
+            handleChange={handleChangeType}
+            options={viewTypeOptions}
+          />
+          <SelectType handleChange={handleChangeWeek} options={weekOptions} />
+        </div>
+        <h1 className="order-title">All Orders List</h1>
         {isLoading && (
           <img
-            className='icon-loading'
+            className="icon-loading"
             src={IconLoading}
-            alt='loading-spinner'
+            alt="loading-spinner"
           />
         )}
         {allOrderListFomatted.length !== 0 &&
-          allOrderListFomatted.map(item => (
+          allOrderListFomatted.map((item, idx) => (
             <AllOrderItem
-              key={item._id}
+              key={idx}
               item={item}
               isAdmin={isAdmin}
               isAllOrders={true}
               isCheckingPaid={isCheckingPaid}
               type={type}
+              week={week}
             />
           ))}
       </div>

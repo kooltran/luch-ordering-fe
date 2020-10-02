@@ -13,8 +13,10 @@ import {
   CHECK_PAID_ALL_WEEK_FAIL,
   GET_ORDERS_HISTORY_REQUEST,
   GET_ORDERS_HISTORY_SUCCESS,
-  GET_ORDERS_HISTORY_FAIL
+  GET_ORDERS_HISTORY_FAIL,
 } from '../actions/actionTypes'
+
+import { groupByNTotal } from '../helpers'
 
 export const getAllOrdersReducer = (state, action) => {
   switch (action.type) {
@@ -25,16 +27,18 @@ export const getAllOrdersReducer = (state, action) => {
         allOrderList: [],
         getOrdersFail: null,
         isCheckingPaid: false,
-        checkPaidFail: null
+        checkPaidFail: null,
       }
     case GET_ALL_ORDERS_SUCCESS:
+      const { data, type } = action.payload
+      const orderListRes = groupByNTotal(data, type, 'username')
       return {
         ...state,
         isLoading: false,
-        allOrderList: action.payload,
+        allOrderList: orderListRes,
         getOrdersFail: null,
         isCheckingPaid: false,
-        checkPaidFail: null
+        checkPaidFail: null,
       }
     case GET_ALL_ORDERS_FAIL:
       return {
@@ -43,7 +47,7 @@ export const getAllOrdersReducer = (state, action) => {
         allOrderList: [],
         getOrdersFail: action.payload.message,
         isCheckingPaid: false,
-        checkPaidFail: null
+        checkPaidFail: null,
       }
     case GET_ORDERS_HISTORY_REQUEST:
       return {
@@ -52,7 +56,7 @@ export const getAllOrdersReducer = (state, action) => {
         allOrderList: [],
         getOrdersFail: null,
         isCheckingPaid: false,
-        checkPaidFail: null
+        checkPaidFail: null,
       }
     case GET_ORDERS_HISTORY_SUCCESS:
       return {
@@ -61,7 +65,7 @@ export const getAllOrdersReducer = (state, action) => {
         allOrderList: action.payload,
         getOrdersFail: null,
         isCheckingPaid: false,
-        checkPaidFail: null
+        checkPaidFail: null,
       }
     case GET_ORDERS_HISTORY_FAIL:
       return {
@@ -70,7 +74,7 @@ export const getAllOrdersReducer = (state, action) => {
         allOrderList: [],
         getOrdersFail: action.payload.message,
         isCheckingPaid: false,
-        checkPaidFail: null
+        checkPaidFail: null,
       }
     case CHECK_PROVIDER_PAID_REQUEST:
       return {
@@ -78,7 +82,7 @@ export const getAllOrdersReducer = (state, action) => {
         isLoading: false,
         getOrdersFail: null,
         isCheckingPaid: true,
-        checkPaidFail: null
+        checkPaidFail: null,
       }
     case CHECK_PROVIDER_PAID_SUCCESS:
       return {
@@ -87,7 +91,7 @@ export const getAllOrdersReducer = (state, action) => {
         getOrdersFail: null,
         isCheckingPaid: false,
         allOrderList: action.payload,
-        checkPaidFail: null
+        checkPaidFail: null,
       }
     case CHECK_PROVIDER_PAID_FAIL:
       return {
@@ -96,7 +100,7 @@ export const getAllOrdersReducer = (state, action) => {
         getOrdersFail: null,
         isCheckingPaid: false,
         allOrderList: [],
-        checkPaidFail: action.payload
+        checkPaidFail: action.payload,
       }
     case CHECK_PAID_ALL_WEEK_REQUEST:
       return {
@@ -104,16 +108,22 @@ export const getAllOrdersReducer = (state, action) => {
         isCheckingPaid: true,
         checkPaidFail: null,
         isLoading: false,
-        getOrdersFail: null
+        getOrdersFail: null,
       }
     case CHECK_PAID_ALL_WEEK_SUCCESS:
+      const orderListPaidAllWeek = groupByNTotal(
+        action.payload,
+        'user',
+        'username'
+      )
+
       return {
         ...state,
         isCheckingPaid: false,
-        allOrderList: action.payload,
+        allOrderList: orderListPaidAllWeek,
         checkPaidFail: null,
         isLoading: false,
-        getOrdersFail: null
+        getOrdersFail: null,
       }
     case CHECK_PAID_ALL_WEEK_FAIL:
       return {
@@ -122,40 +132,28 @@ export const getAllOrdersReducer = (state, action) => {
         allOrderList: [],
         checkPaidFail: action.payload.message,
         isLoading: false,
-        getOrdersFail: null
+        getOrdersFail: null,
       }
     case CHECK_PAID_ORDER_ITEM_REQUEST:
       return {
         ...state,
-        isCheckingPaid: true
+        isCheckingPaid: true,
       }
     case CHECK_PAID_ORDER_ITEM_SUCCESS:
-      const { allOrderList } = state
-      const res = action.payload
-
-      const allOrderListPaid = allOrderList.map(item => {
-        if (item._id === res._id) {
-          return {
-            ...item,
-            orders: res.orders,
-            isPaid: res.isPaid
-          }
-        } else {
-          return item
-        }
-      })
+      const { data: paidData, type: paidType } = action.payload
+      const orderListPaid = groupByNTotal(paidData, paidType, 'username')
 
       return {
         ...state,
         isCheckingPaid: false,
-        allOrderList: allOrderListPaid
+        allOrderList: orderListPaid,
       }
     case CHECK_PAID_ORDER_ITEM_FAIL:
       return {
         ...state,
         isCheckingPaid: false,
         allOrderList: [],
-        checkPaidFail: action.payload
+        checkPaidFail: action.payload,
       }
     default:
       return state

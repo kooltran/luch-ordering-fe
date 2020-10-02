@@ -44,12 +44,12 @@ export const getPaymentByUser = () => {
   return axiosInstance.get('/orders/payment-by-user').then(res => res.data)
 }
 
-export const getPaymentByWeek = type => {
+export const getPaymentByWeek = week => {
   return axiosInstance
     .get('/orders/payment-by-week', {
       params: {
-        type
-      }
+        week,
+      },
     })
     .then(res => res.data)
 }
@@ -58,8 +58,8 @@ export const getPaymentHistory = type => {
   return axiosInstance
     .get('/orders/payments', {
       params: {
-        type
-      }
+        type,
+      },
     })
     .then(res => res.data)
 }

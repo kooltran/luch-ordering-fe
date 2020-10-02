@@ -1,18 +1,20 @@
 import { Select } from 'antd'
 import React from 'react'
 
-const SelectType = ({ handleChangeType, className }) => {
+const SelectType = ({ handleChange, options }) => {
   const { Option } = Select
 
   return (
     <Select
-      defaultValue='date'
-      style={{ width: 120 }}
-      onChange={handleChangeType}
-      className={className}
+      defaultValue={options[0].value}
+      style={{ width: 150 }}
+      onChange={handleChange}
     >
-      <Option value='date'>Date</Option>
-      <Option value='user'>User</Option>
+      {options.map(option => (
+        <Option key={option.value} value={option.value}>
+          {option.label}
+        </Option>
+      ))}
     </Select>
   )
 }

@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+
 import { useFetchMenu } from './useFetchMenu'
 import { useAppContext } from '../../AppContext'
 import { fetchCurrentUser } from '../../api/user'
@@ -24,9 +25,9 @@ const MenuList = () => {
   }, [dispatch, fetchMenuList])
 
   return (
-    <div className='menu-wrapper'>
+    <div className="menu-wrapper">
       {isLoading && (
-        <img className='icon-loading' src={IconLoading} alt='loading-spinner' />
+        <img className="icon-loading" src={IconLoading} alt="loading-spinner" />
       )}
       {menuList.map(item => (
         <MenuItem key={item._id} item={item} />
