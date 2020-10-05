@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "3e3c769da0536b2caa28b040c77eb28c",
+    "revision": "1bcedfba4fce001e16ac592f71eec2fa",
     "url": "/lunch-ordering-fe/index.html"
   },
   {
-    "revision": "903738dc25239f4d3047",
+    "revision": "2d650ae1bdb96c264ebd",
     "url": "/lunch-ordering-fe/static/css/2.d5e8013a.chunk.css"
   },
   {
-    "revision": "57081d81f80d15ab9722",
-    "url": "/lunch-ordering-fe/static/css/main.01c2c920.chunk.css"
+    "revision": "f77b5c858178b1df42cc",
+    "url": "/lunch-ordering-fe/static/css/main.89bda192.chunk.css"
   },
   {
-    "revision": "903738dc25239f4d3047",
-    "url": "/lunch-ordering-fe/static/js/2.060a95a4.chunk.js"
+    "revision": "2d650ae1bdb96c264ebd",
+    "url": "/lunch-ordering-fe/static/js/2.195426d4.chunk.js"
   },
   {
     "revision": "3453b8997016469371284a28c0e873e2",
-    "url": "/lunch-ordering-fe/static/js/2.060a95a4.chunk.js.LICENSE.txt"
+    "url": "/lunch-ordering-fe/static/js/2.195426d4.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "57081d81f80d15ab9722",
-    "url": "/lunch-ordering-fe/static/js/main.116a83ff.chunk.js"
+    "revision": "f77b5c858178b1df42cc",
+    "url": "/lunch-ordering-fe/static/js/main.5706086c.chunk.js"
   },
   {
     "revision": "5b7de3442e45bbd7c28c",
