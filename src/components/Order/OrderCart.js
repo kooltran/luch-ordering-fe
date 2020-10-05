@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import classnames from 'classnames'
-import moment from 'moment'
+import * as dayjs from 'dayjs'
+
 import { useAppContext } from '../../AppContext'
 import CartItem from './CartItem'
 import { useSubmitOrder } from './useSubmitOrder'
@@ -31,31 +32,32 @@ const OrderCart = () => {
       dishId: order.id,
       quantity: order.quantity,
       date: new Date().toDateString(),
-      createdAt: moment().startOf('day'),
-      paid: false
+      createdAt: dayjs().startOf('day'),
+      paid: false,
+      week: dayjs().week(),
     }))
     submitOrders(orderListParams)
   }
 
   return (
-    <div className='cart-wrapper'>
+    <div className="cart-wrapper">
       <div
         className={classnames('cart-icon', { shake: isAnimateCart })}
         onClick={handleOpenCart}
       >
-        <img src={CartIcon} alt='cart-icon' />
-        <span className='cart-qty'>{cartList.length}</span>
+        <img src={CartIcon} alt="cart-icon" />
+        <span className="cart-qty">{cartList.length}</span>
       </div>
       <div
         className={classnames('cart-content', {
-          show: openCart && cartList.length
+          show: openCart && cartList.length,
         })}
       >
-        {isLoading && <img className='cart-loading' src={IconLoading} alt='' />}
+        {isLoading && <img className="cart-loading" src={IconLoading} alt="" />}
         {cartList.map(order => (
           <CartItem key={order.id} order={order} />
         ))}
-        <button className='btn-order' onClick={handleSubmitOrder}>
+        <button className="btn-order" onClick={handleSubmitOrder}>
           Order
         </button>
       </div>

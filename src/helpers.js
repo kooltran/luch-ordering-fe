@@ -10,7 +10,7 @@ const monthsName = [
   'Sep',
   'Oct',
   'Nov',
-  'Dec'
+  'Dec',
 ]
 
 export const convertSecondToHours = seconds => {
@@ -56,10 +56,10 @@ const countDown = setInterval((year, month, day) => {
   }
 }, 1000)
 
-export const groupByNTotal = (array, key, subKey = null) => {
+export const groupByNTotal = (array, key, subKey = 'null') => {
   return array.reduce((acc, item) => {
     const sortkey = item[key]
-    if (typeof sortkey === 'object' && subKey) {
+    if (typeof sortkey === 'object') {
       acc[sortkey[subKey]] = acc[sortkey[subKey]] || []
       acc[sortkey[subKey]].push(item)
     } else {
@@ -81,4 +81,10 @@ export const urlBase64ToUint8Array = base64String => {
     outputArray[i] = rawData.charCodeAt(i)
   }
   return outputArray
+}
+
+export const getDateOfWeek = (w, y) => {
+  var d = (w - 1) * 7 - 1 // 1st of January + 7 days for each week
+
+  return new Date(y, 0, d)
 }

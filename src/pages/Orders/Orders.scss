@@ -12,10 +12,21 @@
     }
   }
 
+  &-totalweek {
+    display: flex;
+    margin-bottom: 40px;
+    font-size: 32px;
+    justify-content: space-between;
+
+    .price {
+      font-weight: 600;
+      color: #ec3232;
+    }
+  }
+
   &-filter {
-    position: absolute !important;
-    top: 0;
-    right: 0;
+    display: flex;
+    justify-content: space-between;
   }
 
   &-title {
@@ -155,7 +166,7 @@
     &__date-title {
       position: relative;
       text-align: center;
-      font-size: 16px;
+      font-size: 20px;
       font-weight: 600;
       background: #2e4c5d;
       color: #fff;
@@ -176,14 +187,18 @@
     &__total {
       display: flex;
       padding: 10px 15px;
-      font-size: 20px;
+      font-size: 18px;
       justify-content: space-between;
-      background: #333;
+      background: #d53232bf;
       color: #fff;
       font-weight: bold;
 
       span {
         width: 15%;
+
+        &:first-child {
+          text-align: left;
+        }
 
         &:nth-child(2) {
           width: 10%;
