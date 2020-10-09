@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "6643d27d8d3b2304a7aa81b4b9d461c6",
+    "revision": "dfe02865714c8d8607a641e94d79f76d",
     "url": "/lunch-ordering-fe/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/lunch-ordering-fe/static/css/2.d5e8013a.chunk.css"
   },
   {
-    "revision": "70a79aba3abdb5494034",
+    "revision": "99047fa51d02b556f157",
     "url": "/lunch-ordering-fe/static/css/main.b422fe3b.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/lunch-ordering-fe/static/js/2.195426d4.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "70a79aba3abdb5494034",
-    "url": "/lunch-ordering-fe/static/js/main.906dc00c.chunk.js"
+    "revision": "99047fa51d02b556f157",
+    "url": "/lunch-ordering-fe/static/js/main.db910a11.chunk.js"
   },
   {
     "revision": "5b7de3442e45bbd7c28c",
