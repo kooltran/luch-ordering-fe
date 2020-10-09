@@ -1,12 +1,12 @@
 import { Select } from 'antd'
 import React from 'react'
 
-const SelectType = ({ handleChange, options }) => {
+const SelectType = ({ handleChange, options, defaultValue }) => {
   const { Option } = Select
 
   return (
     <Select
-      defaultValue={options[0].value}
+      defaultValue={defaultValue}
       style={{ width: 150 }}
       onChange={handleChange}
     >
