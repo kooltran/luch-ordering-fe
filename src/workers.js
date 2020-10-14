@@ -5,7 +5,7 @@ const year = curDate.getFullYear()
 const month = curDate.getMonth()
 const day = curDate.getDate()
 
-const targetTime = new Date(year, month, day, 15, 5, 0, 0).getTime()
+const targetTime = new Date(year, month, day, 13, 59, 0, 0).getTime()
 
 const A_DAY_PERIOD = 60 * 60 * 60 * 24
 
