@@ -7,7 +7,7 @@ import { useAppContext } from '../../AppContext'
 import {
   getAllOrdersRequest,
   getAllOrdersSuccess,
-  getAllOrdersFail
+  getAllOrdersFail,
 } from '../../actions/orderAction'
 import SelectType from '../../components/SelectType/SelectType'
 import { getPaymentByWeek } from '../../api/order'
@@ -25,21 +25,21 @@ const currentWeek = dayjs().week()
 
 const viewTypeOptions = [
   { label: 'Date', value: 'date' },
-  { label: 'User', value: 'user' }
+  { label: 'User', value: 'user' },
 ]
 
 const weekOptions = [
   { label: 'Current Week', value: currentWeek },
   { label: 'Last Week', value: currentWeek - 1 },
-  { label: 'Last 2 Week', value: currentWeek - 2 }
+  { label: 'Last 2 Week', value: currentWeek - 2 },
 ]
 
 const OrderList = () => {
   const [
     {
-      allOrders: { allOrderList, isLoading, isCheckingPaid }
+      allOrders: { allOrderList, isLoading, isCheckingPaid },
     },
-    dispatch
+    dispatch,
   ] = useAppContext()
   const { checkPaidOrderAllWeek } = useCheckPaidOrder()
   const [type, setType] = useState('user')
@@ -51,7 +51,8 @@ const OrderList = () => {
   const allOrderListFomatted = Object.keys(allOrderList).map(key => {
     const orders = allOrderList[key]
     const totalPrice = orders.reduce(
-      (acc, order) => acc + 35 * order.quantity,
+      (acc, order) =>
+        acc + parseInt(order.dish.price.slice(0, 2)) * order.quantity,
       0
     )
 
@@ -61,7 +62,7 @@ const OrderList = () => {
       [type]: key,
       orders,
       totalPrice,
-      totalQty
+      totalQty,
     }
   })
 
@@ -96,7 +97,7 @@ const OrderList = () => {
       id: item.orders[0].user._id,
       isPaidAllWeek: checked,
       userId: item.user,
-      week: week
+      week: week,
     })
   }
 
@@ -111,19 +112,19 @@ const OrderList = () => {
   }
 
   return (
-    <div className='page'>
-      <div className='order-wrapper'>
-        <div className='order-totalweek'>
+    <div className="page">
+      <div className="order-wrapper">
+        <div className="order-totalweek">
           <span>Tổng tiền</span>
           <span>{quantityAllWeek}</span>
-          <div className='price'>
+          <div className="price">
             {`${priceAllWeek},000`}
             <sup>đ</sup>
           </div>
         </div>
-        <div className='order-filter'>
+        <div className="order-filter">
           <SelectType
-            defaultValue='user'
+            defaultValue="user"
             handleChange={handleChangeType}
             options={viewTypeOptions}
           />
@@ -133,17 +134,17 @@ const OrderList = () => {
             options={weekOptions}
           />
         </div>
-        <h1 className='order-title'>All Orders List</h1>
+        <h1 className="order-title">All Orders List</h1>
         {isLoading && (
           <img
-            className='icon-loading'
+            className="icon-loading"
             src={IconLoading}
-            alt='loading-spinner'
+            alt="loading-spinner"
           />
         )}
         {allOrderListFomatted.length > 0 && (
-          <div className='order-summary'>
-            <div className='order-summary__title'>
+          <div className="order-summary">
+            <div className="order-summary__title">
               <span>{`${type === 'date' ? 'Ngày' : 'Tên'}`}</span>
               <span>Số Lượng</span>
               <span>Tiền</span>
@@ -155,22 +156,22 @@ const OrderList = () => {
                 <div
                   key={idx}
                   className={classnames('order-summary__item', {
-                    paid: isPaidAllWeek
+                    paid: isPaidAllWeek,
                   })}
                 >
-                  <span className='name'>{item.user || item.date}</span>
-                  <span className='quantity'>{item.totalQty}</span>
-                  <span className='price'>{`${item.totalPrice},000đ`}</span>
-                  <span className='order-checkbox paid'>
+                  <span className="name">{item.user || item.date}</span>
+                  <span className="quantity">{item.totalQty}</span>
+                  <span className="price">{`${item.totalPrice},000đ`}</span>
+                  <span className="order-checkbox paid">
                     <input
-                      type='checkbox'
+                      type="checkbox"
                       onChange={e => handlePaidAllWeek(e, item)}
                       checked={isPaidAllWeek}
                       disabled={isCheckingPaid}
                     />
                     <span
                       className={classnames('check-mask', {
-                        'is-disabled': isCheckingPaid
+                        'is-disabled': isCheckingPaid,
                       })}
                     ></span>
                   </span>

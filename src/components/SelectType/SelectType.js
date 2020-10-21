@@ -5,11 +5,7 @@ const SelectType = ({ handleChange, options, defaultValue }) => {
   const { Option } = Select
 
   return (
-    <Select
-      defaultValue={defaultValue}
-      style={{ width: 150 }}
-      onChange={handleChange}
-    >
+    <Select defaultValue={defaultValue} onChange={handleChange}>
       {options.map(option => (
         <Option key={option.value} value={option.value}>
           {option.label}

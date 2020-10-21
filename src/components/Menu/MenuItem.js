@@ -4,16 +4,30 @@ import classnames from 'classnames'
 import { useAppContext } from '../../AppContext'
 import IconPlus from '../../assets/plus.svg'
 import { addCartItem, removeCartAddedFlag } from '../../actions/cartAction'
+import SelectType from '../SelectType/SelectType'
+
 import { REDIRECT_URL } from '../../constants'
 
 const MenuItem = ({ item }) => {
   const [quantity, setQty] = useState(1)
-  const [{ users, cart, orderTimeout }, dispatch] = useAppContext()
+  const [{ users, cart, orderTimeout, menu }, dispatch] = useAppContext()
+
+  const extraDishes = menu.menuList
+    .filter(dish => !dish.isExtra)
+    .map(item => ({ label: item.name, value: item.name }))
+
+  const [extraDish, setExtraDish] = useState(extraDishes[0].value)
   const { user } = users
   const { cartList } = cart
 
   const handleAddTocart = () => {
-    const formattedCartItem = { id: item._id, dish_name: item.name, quantity }
+    const formattedCartItem = {
+      id: item._id,
+      dish_name: item.isExtra ? `${extraDish} thêm` : item.name,
+      quantity,
+      extraDish: item.isExtra ? extraDish : null,
+    }
+
     if (user.username) {
       if (cartList.length === 0) {
         dispatch(addCartItem(cartList))
@@ -40,29 +54,48 @@ const MenuItem = ({ item }) => {
     }
   }
 
+  const handleChangeExtraDish = value => {
+    setExtraDish(value)
+  }
+
   return (
     <div
       className={classnames('menu-item', {
         'is-disabled':
           cartList.some(cart => cart.id === item._id) ||
-          orderTimeout.isOrderTimeout
+          orderTimeout.isOrderTimeout,
+        'extra-dish': item.isExtra,
       })}
     >
-      <div className='image'>
-        <img className='img-dish' src={item.img} alt={item.name} />
-        <div onClick={handleAddTocart}>
-          <img className='icon-add' src={IconPlus} alt='' />
+      {!item.isExtra ? (
+        <div className="image">
+          <img className="img-dish" src={item.img} alt={item.name} />
+          <div onClick={handleAddTocart}>
+            <img className="icon-add" src={IconPlus} alt="" />
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="dish-type">
+          <SelectType
+            defaultValue={extraDishes[0].label}
+            handleChange={handleChangeExtraDish}
+            options={extraDishes}
+          />
 
-      <div className='desc'>
-        <div className='info'>
-          <span className='name'>{item.name}</span>
-          <span className='price'>{item.price}</span>
+          <div onClick={handleAddTocart}>
+            <img className="icon-add" src={IconPlus} alt="" />
+          </div>
         </div>
-        <div className='quantity'>
+      )}
+
+      <div className="desc">
+        <div className="info">
+          <span className="name">{item.name}</span>
+          <span className="price">{item.price}</span>
+        </div>
+        <div className="quantity">
           <input
-            type='number'
+            type="number"
             value={quantity}
             onChange={handleChangeQuantity}
           />

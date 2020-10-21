@@ -35,6 +35,7 @@ const OrderCart = () => {
       createdAt: dayjs().startOf('day'),
       paid: false,
       week: dayjs().week(),
+      extraDish: order.extraDish,
     }))
     submitOrders(orderListParams)
   }
