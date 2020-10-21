@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/lunch-ordering-fe/static/css/main.f7d7d1fc.chunk.css",
-    "main.js": "/lunch-ordering-fe/static/js/main.46082628.chunk.js",
-    "main.js.map": "/lunch-ordering-fe/static/js/main.46082628.chunk.js.map",
+    "main.css": "/lunch-ordering-fe/static/css/main.5f6385e7.chunk.css",
+    "main.js": "/lunch-ordering-fe/static/js/main.60ab9c29.chunk.js",
+    "main.js.map": "/lunch-ordering-fe/static/js/main.60ab9c29.chunk.js.map",
     "runtime-main.js": "/lunch-ordering-fe/static/js/runtime-main.7725a23b.js",
     "runtime-main.js.map": "/lunch-ordering-fe/static/js/runtime-main.7725a23b.js.map",
     "static/css/2.d5e8013a.chunk.css": "/lunch-ordering-fe/static/css/2.d5e8013a.chunk.css",
-    "static/js/2.195426d4.chunk.js": "/lunch-ordering-fe/static/js/2.195426d4.chunk.js",
-    "static/js/2.195426d4.chunk.js.map": "/lunch-ordering-fe/static/js/2.195426d4.chunk.js.map",
+    "static/js/2.ec6954d9.chunk.js": "/lunch-ordering-fe/static/js/2.ec6954d9.chunk.js",
+    "static/js/2.ec6954d9.chunk.js.map": "/lunch-ordering-fe/static/js/2.ec6954d9.chunk.js.map",
     "index.html": "/lunch-ordering-fe/index.html",
-    "precache-manifest.95e9e2e9f467a39962f86de7cbc963b7.js": "/lunch-ordering-fe/precache-manifest.95e9e2e9f467a39962f86de7cbc963b7.js",
+    "precache-manifest.b9ee40b0e12098bcb91949046c88f94f.js": "/lunch-ordering-fe/precache-manifest.b9ee40b0e12098bcb91949046c88f94f.js",
     "service-worker.js": "/lunch-ordering-fe/service-worker.js",
     "static/css/2.d5e8013a.chunk.css.map": "/lunch-ordering-fe/static/css/2.d5e8013a.chunk.css.map",
-    "static/css/main.f7d7d1fc.chunk.css.map": "/lunch-ordering-fe/static/css/main.f7d7d1fc.chunk.css.map",
-    "static/js/2.195426d4.chunk.js.LICENSE.txt": "/lunch-ordering-fe/static/js/2.195426d4.chunk.js.LICENSE.txt",
+    "static/css/main.5f6385e7.chunk.css.map": "/lunch-ordering-fe/static/css/main.5f6385e7.chunk.css.map",
+    "static/js/2.ec6954d9.chunk.js.LICENSE.txt": "/lunch-ordering-fe/static/js/2.ec6954d9.chunk.js.LICENSE.txt",
     "static/media/cart.svg": "/lunch-ordering-fe/static/media/cart.890dce60.svg",
     "static/media/checklist.svg": "/lunch-ordering-fe/static/media/checklist.80d775c4.svg",
     "static/media/congrats.svg": "/lunch-ordering-fe/static/media/congrats.211b8e65.svg",
@@ -27,8 +27,8 @@
   "entrypoints": [
     "static/js/runtime-main.7725a23b.js",
     "static/css/2.d5e8013a.chunk.css",
-    "static/js/2.195426d4.chunk.js",
-    "static/css/main.f7d7d1fc.chunk.css",
-    "static/js/main.46082628.chunk.js"
+    "static/js/2.ec6954d9.chunk.js",
+    "static/css/main.5f6385e7.chunk.css",
+    "static/js/main.60ab9c29.chunk.js"
   ]
 }
