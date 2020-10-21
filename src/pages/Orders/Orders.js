@@ -42,8 +42,8 @@ const Orders = () => {
 
   const formattedOrderList = orderList.map(order => ({
     quantity: order.quantity,
-    dishName: order.dish.name,
-    price: 35,
+    dishName: order.extraDish ? `${order.extraDish} thêm` : order.dish.name,
+    price: parseInt(order.dish.price.slice(0, 2)),
   }))
 
   const orderListGroupByDishname = groupByNTotal(formattedOrderList, 'dishName')
@@ -91,7 +91,7 @@ const Orders = () => {
             </div>
             {orderListTotalQty.map(order => (
               <div key={order.name} className="item">
-                <span>{order.name}</span>
+                <span>{order.extraDish || order.name}</span>
                 <span>{order.qty}</span>
                 <span>{`${order.price}.000đ`}</span>
               </div>

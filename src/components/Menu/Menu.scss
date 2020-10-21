@@ -38,7 +38,7 @@
         height: 100%;
         background: #797474;
         z-index: 100;
-        content: "";
+        content: '';
       }
 
       &:hover {
@@ -113,6 +113,31 @@
         border: 1px solid #333;
         text-align: center;
         font-size: 16px;
+      }
+    }
+
+    &.extra-dish {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      .dish-type {
+        width: 100%;
+        margin-top: 20px;
+
+        .icon-add {
+          width: 30px;
+          height: 30px;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          cursor: pointer;
+        }
+
+        .ant-select {
+          width: 100%;
+        }
       }
     }
   }
