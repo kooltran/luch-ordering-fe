@@ -4,7 +4,10 @@ import {
   GET_ORDERS_FAIL,
   DELETE_ORDER_SUCCESS,
   DELETE_ORDER_REQUEST,
-  DELETE_ORDER_FAIL
+  DELETE_ORDER_FAIL,
+  UPDATE_ORDER_REQUEST,
+  UPDATE_ORDER_SUCCESS,
+  UPDATE_ORDER_FAIL
 } from '../actions/actionTypes'
 
 export const getOrdersReducer = (state, action) => {
@@ -65,6 +68,40 @@ export const getOrdersReducer = (state, action) => {
         getOrdersFail: null,
         deleteOrderRequest: false,
         deleteOrderFail: action.payload.message
+      }
+    }
+    case UPDATE_ORDER_REQUEST: {
+      return {
+        ...state,
+        isOrdersLoading: false,
+        getOrdersFail: null,
+        updateOrderRequest: true,
+        updateOrderFail: null
+      }
+    }
+    case UPDATE_ORDER_SUCCESS: {
+      const updatedOrder = action.payload
+      const { orderList } = state
+
+      return {
+        ...state,
+        isOrdersLoading: false,
+        orderList: orderList.map(order =>
+          order._id === updatedOrder._id ? updatedOrder : order
+        ),
+        getOrdersFail: null,
+        deleteOrderRequest: false,
+        deleteOrderFail: null
+      }
+    }
+    case UPDATE_ORDER_FAIL: {
+      return {
+        ...state,
+        isOrdersLoading: false,
+        orderList: [],
+        getOrdersFail: null,
+        updateOrderRequest: false,
+        updateOrderFail: action.payload.message
       }
     }
     default:

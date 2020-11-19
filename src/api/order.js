@@ -63,3 +63,7 @@ export const getPaymentHistory = type => {
     })
     .then(res => res.data)
 }
+
+export const updateOrder = params => {
+  return axiosInstance.put('/orders/update', params).then(res => res.data)
+}

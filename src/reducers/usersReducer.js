@@ -22,13 +22,13 @@ export const usersReducer = (state, action = {}) => {
     case GET_USERS_SUCCESS:
       return {
         ...state,
-        users: action.payload,
+        userList: action.payload,
         getUserFail: null
       }
     case GET_USERS_FAIL:
       return {
         ...state,
-        users: [],
+        userList: [],
         getUserFail: action.payload.message
       }
     default:

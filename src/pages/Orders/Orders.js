@@ -11,6 +11,9 @@ import { getOrders } from '../../api/order'
 
 import { groupByNTotal } from '../../helpers'
 
+import { useFetchMenu } from '../../components/Menu/useFetchMenu'
+import { useFetchUsers } from './useFetchUsers'
+
 import './Orders.scss'
 import IconLoading from '../../assets/loading.svg'
 
@@ -21,6 +24,8 @@ const Orders = () => {
     },
     dispatch,
   ] = useAppContext()
+  const fetchMenuList = useFetchMenu()
+  const fetchUsersList = useFetchUsers()
 
   const roles = localStorage.getItem('roles')
   const isAdmin = roles === 'admin'
@@ -35,10 +40,14 @@ const Orders = () => {
         dispatch(getOrdersFail(error))
       }
     }
+    fetchMenuList()
+    fetchUsersList()
     getOrderList()
-  }, [dispatch])
+  }, [dispatch, fetchMenuList, fetchUsersList])
 
-  const sortedList = orderList.sort((a, b) => a.dish.name.localeCompare(b.name))
+  // const orderList = orderList.sort(
+  //   (a, b) => a.dish && a.dish.name.localeCompare(b.name)
+  // )
 
   const formattedOrderList = orderList.map(order => ({
     quantity: order.quantity,
@@ -71,59 +80,60 @@ const Orders = () => {
   )
 
   return (
-    <div className="page">
-      <div className="order-wrapper">
-        <h1 className="order-title">Orders List</h1>
+    <div className='page'>
+      <div className='order-wrapper'>
+        <h1 className='order-title'>Orders List</h1>
         {isOrdersLoading && (
           <img
-            className="icon-loading"
+            className='icon-loading'
             src={IconLoading}
-            alt="loading-spinner"
+            alt='loading-spinner'
           />
         )}
-        {sortedList.length !== 0 && (
-          <div className="order-total">
-            <h3 className="title">Total List</h3>
-            <div className="header">
+        {orderList.length !== 0 && (
+          <div className='order-total'>
+            <h3 className='title'>Total List</h3>
+            <div className='header'>
               <span>Tên món</span>
               <span>Số Lượng</span>
               <span>Giá</span>
             </div>
             {orderListTotalQty.map(order => (
-              <div key={order.name} className="item">
+              <div key={order.name} className='item'>
                 <span>{order.extraDish || order.name}</span>
                 <span>{order.qty}</span>
                 <span>{`${order.price}.000đ`}</span>
               </div>
             ))}
-            <div className="total">
+            <div className='total'>
               <span>Tổng cộng</span>
               <span>{totalQtyDishes}</span>
               <span>{`${totalPriceDishes}.000đ`}</span>
             </div>
           </div>
         )}
-        {sortedList.length !== 0 && (
-          <div className="order-content">
-            <div className="order-item__header">
+        {orderList.length !== 0 && (
+          <div className='order-content'>
+            <div className='order-item__header'>
               <span>Người Order</span>
               <span>Số Lượng</span>
-              <span className="dish-name">Tên Món</span>
+              <span className='dish-name'>Tên Món</span>
               <span>Ngày Order</span>
               <span>Giá</span>
               {isAdmin && (
                 <>
-                  <span className="delete"></span>
+                  <span className='delete'></span>
+                  <span className='edit'></span>
                 </>
               )}
             </div>
-            {sortedList.map(order => (
+            {orderList.map(order => (
               <OrderItem
                 key={order._id}
                 order={order}
                 isAdmin={isAdmin}
                 isAllOrders={false}
-                type="date"
+                type='date'
               />
             ))}
           </div>

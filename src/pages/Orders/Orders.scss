@@ -210,7 +210,8 @@
       }
 
       .paid,
-      .delete {
+      .delete,
+      .edit {
         width: 6%;
       }
     }
@@ -320,7 +321,8 @@
       height: 25px;
     }
 
-    .delete {
+    .delete,
+    .edit {
       width: 6%;
       cursor: pointer;
 

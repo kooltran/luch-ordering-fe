@@ -15,7 +15,7 @@ const menuInitState = {
 
 const usersInitState = {
   user: {},
-  users: [],
+  userList: [],
   userFail: null
 }
 
@@ -36,7 +36,9 @@ const orderListReducerInitState = {
   isOrdersLoading: false,
   getOrdersFail: null,
   deleteOrderRequest: false,
-  deleteOrderFail: null
+  deleteOrderFail: null,
+  updateOrderRequest: false,
+  updateOrderFail: null
 }
 
 const allOrdersReducerInitState = {
