@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "43b57a044e2281ac14490658b30ce702",
+    "revision": "1b50658fd9f6f1baebe6633db61a20d1",
     "url": "/lunch-ordering-fe/index.html"
   },
   {
-    "revision": "b6faf08addb520ec4e2e",
+    "revision": "88c3f20441d8e7e28a3b",
     "url": "/lunch-ordering-fe/static/css/2.d5e8013a.chunk.css"
   },
   {
-    "revision": "da851562d92484f1ad2e",
-    "url": "/lunch-ordering-fe/static/css/main.5f6385e7.chunk.css"
+    "revision": "8e5a4f8265f01e27add2",
+    "url": "/lunch-ordering-fe/static/css/main.f747a65c.chunk.css"
   },
   {
-    "revision": "b6faf08addb520ec4e2e",
-    "url": "/lunch-ordering-fe/static/js/2.ec6954d9.chunk.js"
+    "revision": "88c3f20441d8e7e28a3b",
+    "url": "/lunch-ordering-fe/static/js/2.47fa3ca5.chunk.js"
   },
   {
     "revision": "3453b8997016469371284a28c0e873e2",
-    "url": "/lunch-ordering-fe/static/js/2.ec6954d9.chunk.js.LICENSE.txt"
+    "url": "/lunch-ordering-fe/static/js/2.47fa3ca5.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "da851562d92484f1ad2e",
-    "url": "/lunch-ordering-fe/static/js/main.60ab9c29.chunk.js"
+    "revision": "8e5a4f8265f01e27add2",
+    "url": "/lunch-ordering-fe/static/js/main.574ec806.chunk.js"
   },
   {
     "revision": "5b7de3442e45bbd7c28c",
@@ -58,6 +58,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "566800df89cedb22bc3c01bdb30bc836",
     "url": "/lunch-ordering-fe/static/media/old_paper_bg.566800df.jpg"
+  },
+  {
+    "revision": "b075381714630c358e79b3bde1d9b466",
+    "url": "/lunch-ordering-fe/static/media/pencil.b0753817.svg"
   },
   {
     "revision": "311313cded0dc23bba479b786ac0aad8",
