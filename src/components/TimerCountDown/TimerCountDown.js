@@ -11,7 +11,7 @@ const TimerCountDown = () => {
   const year = curDate.getFullYear()
   const month = curDate.getMonth()
   const day = curDate.getDate()
-  const endTime = new Date(year, month, day, 10, 58, 0, 0).getTime()
+  const endTime = new Date(year, month, day, 22, 0, 0, 0).getTime()
 
   const startTime = new Date(year, month, day, 8, 30, 0, 0).getTime()
   const currentTime = new Date().getTime()
@@ -21,7 +21,7 @@ const TimerCountDown = () => {
   const [state, setState] = useState({
     hours: 0,
     minutes: 0,
-    seconds: 0
+    seconds: 0,
   })
 
   const [countDownTime] = useState(endTime)

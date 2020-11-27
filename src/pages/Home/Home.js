@@ -11,6 +11,9 @@ import { useHistory } from 'react-router-dom'
 
 import 'react-toastify/dist/ReactToastify.css'
 
+import { urlBase64ToUint8Array } from '../../helpers'
+import { DOMAIN } from '../../constants'
+
 import { Modal, Button } from 'antd'
 
 import './Home.scss'
@@ -25,6 +28,10 @@ const Home = () => {
   const isAdmin = roles === 'admin'
 
   useEffect(() => {
+    if ('serviceWorker' in navigator) {
+      sendNotification()
+    }
+
     if (createOrderSuccess) {
       setOpen(createOrderSuccess)
     }
@@ -36,6 +43,42 @@ const Home = () => {
 
   const handleGotoOrder = () => {
     history.push('/orders')
+  }
+
+  const sendNotification = async () => {
+    // Register Service Worker
+    console.log('Registering service worker...')
+
+    const register = await navigator.serviceWorker.register(
+      ` ${process.env.PUBLIC_URL}/service.js`
+    )
+    console.log(register, 'register')
+    console.log('Service Worker Registered...')
+
+    // Register Push
+    const vapidPublicKey = process.env.REACT_APP_FCM_PUBLIC_KEY
+    const convertedVapidKey = urlBase64ToUint8Array(vapidPublicKey)
+    setTimeout(async () => {
+      const subscription = await register.pushManager.subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: convertedVapidKey,
+      })
+      console.log(subscription, 'subscription')
+      console.log('Push Registered...')
+
+      // Send Push notification
+      console.log('Sending Push Notification')
+
+      await fetch(`${DOMAIN}/subscribe`, {
+        method: 'POST',
+        body: JSON.stringify(subscription),
+        headers: {
+          'content-type': 'application/json',
+        },
+      })
+      // await pushNotification(subscription)
+      console.log('Push sent...')
+    }, 500)
   }
 
   return (
@@ -65,7 +108,7 @@ const Home = () => {
             onClick={handleGotoOrder}
           >
             Xem Order
-          </Button>
+          </Button>,
         ]}
       >
         <img className='modal-icon' src={Congrats} alt='forbiden-order' />

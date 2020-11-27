@@ -3,7 +3,6 @@ import { HashRouter as Router, Switch, Route } from 'react-router-dom'
 import Home from './pages/Home/Home'
 import Orders from './pages/Orders/Orders'
 import OrderList from './pages/Orders/OrderList'
-import OrderListHistory from './pages/Orders/OrderHistory'
 import Login from './components/Auth/Login'
 import PrivateRoute from './components/PrivateRoute/PrivateRoute'
 import Logo from './assets/logo.svg'
@@ -31,7 +30,6 @@ const App = () => {
               <Login />
             </Route>
             <PrivateRoute path='/all-orders' component={OrderList} />
-            <PrivateRoute path='/orders-history' component={OrderListHistory} />
           </Switch>
         </Router>
       </div>
